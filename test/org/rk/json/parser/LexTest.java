@@ -20,6 +20,40 @@ public class LexTest {
         System.out.println(m + "::" + msg);
     }
 
+    private static final int jjStopStringLiteralDfa_0(int pos, long active0) {
+        debug("jjStopStringLiteralDfa_0(int pos, long active0)",(active0 & 0x800000L));
+
+
+        StringBuilder buffer = new StringBuilder();
+        curChar = readByte();
+        buffer.append(curChar);
+        debug("curChar-------------", curChar);
+        while( (curChar = readByte()) != '"' ) {
+            //debug("jjMoveStringLiteralDfa1_0", curChar);
+            buffer.append(curChar);
+        }
+
+        jjmatchedKind = 27;
+        jjmatchedPos = nextCharInd + 1;
+        debug("jjMoveStringLiteralDfa1_0", buffer.toString());
+        RToken t = RToken.newToken(jjmatchedKind, buffer.toString());
+        return jjmatchedKind;
+    }
+
+    private static final int jjStartNfa_0(int pos, long active0) {
+        return jjStopStringLiteralDfa_0(pos, active0);
+        //return jjMoveNfa_0(jjStopStringLiteralDfa_0(pos, active0), pos + 1);
+    }
+
+    public static int identifyStringLiteralBegin (long active) {
+        try { curChar = readByte(); }
+         catch(Exception e) {
+              jjStopStringLiteralDfa_0(0, active);
+              return 1;
+         }
+        return jjStartNfa_0(0, active);
+    }
+
     public static int jjMoveStringLiteralDfa1_0 (long active) {
         debug("jjMoveStringLiteralDfa1_0", active);
         StringBuilder buffer = new StringBuilder();
@@ -86,7 +120,7 @@ public class LexTest {
                 return jjStopAtPos(0 , 125);
             case 34: // '"'
                 beginToken = nextCharInd;
-                return jjMoveStringLiteralDfa1_0(0x800000L);
+                return identifyStringLiteralBegin(0x800000L);
             default :
                 return -1;
         }

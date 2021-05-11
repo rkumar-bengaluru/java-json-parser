@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package test;
+package ref;
 
 /**
  * Describes the input token stream.

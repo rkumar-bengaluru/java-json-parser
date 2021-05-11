@@ -1,8 +1,7 @@
 
 package org.rk.json.parser;
 public class RJsonLexer implements RJsonConstants{
-    int BRACE_OPEN = 7;
-    int BRACE_CLOSE = 8;
+
     static final long[] jjtoToken = { 0x1ccf8fc1L, };
     public static final String[] jjstrLiteralImages = {
         "", null, null, null, null, null, "\54", "\173", "\175", "\72", "\133", 
@@ -141,6 +140,52 @@ public class RJsonLexer implements RJsonConstants{
             //jjStopStringLiteralDfa_0(0, active0);
             return 1;
         }
-        return -1;
+        switch(curChar) {
+            case 34: // '"'
+                if ((active0 & 0x800000L) != 0L)
+                    return jjStopAtPos(1, RJsonConstants.STRING_DOUBLE_EMPTY);
+                break;
+            case 39: // '\''
+                if ((active0 & 0x400000L) != 0L)
+                    return jjStopAtPos(1, RJsonConstants.STRING_SINGLE_EMPTY);
+                break;
+            default:
+                break;
+        }
+        return jjStartNfa_0(0, active0);
+    }
+
+    private final int jjStartNfa_0(int pos, long active0) {
+        return jjMoveNfa_0(39, pos + 1);
+    }
+
+    private int jjMoveNfa_0(int startState, int curPos) {
+        int startsAt = 0;
+        int i = 1;
+        int kind = 0x7fffffff;
+        
+        for (;;) 
+        {
+            if (curChar < 64) {
+                do {
+
+                } while(i != startsAt);
+            } else if (curChar < 128) {
+                // 
+            } else {
+
+            }
+            if (kind != 0x7fffffff) {
+                jjmatchedKind = kind;
+                jjmatchedPos = curPos;
+                kind = 0x7fffffff;
+            }
+            ++curPos;
+            if(tokenFound) {
+                return curPos;
+            }
+            try { curChar = input_stream.readChar(); }
+            catch(java.io.IOException e) { return curPos; }
+        }
     }
 }

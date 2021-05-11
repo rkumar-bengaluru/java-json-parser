@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package test;
+package ref;
 
 /**
  * An implementation of interface CharStream, where the stream is assumed to

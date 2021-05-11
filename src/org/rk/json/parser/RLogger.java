@@ -8,4 +8,12 @@ public class RLogger {
     public static void debug(Class clz,String m , String msg) {
         System.out.println(clz.getName() + "::" + m + "::" + msg);
     }
+
+    public static void debug(Class clz,String m , char msg) {
+        System.out.println(clz.getName() + "::" + m + "::" + msg);
+    }
+
+    public static void debug(Class clz,String m , long msg) {
+        System.out.println(clz.getName() + "::" + m + "::" + msg);
+    }
 }

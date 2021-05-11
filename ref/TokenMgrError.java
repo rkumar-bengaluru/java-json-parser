@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package test;
+package ref;
 
 /** Token Manager Error. */
 public class TokenMgrError extends Error

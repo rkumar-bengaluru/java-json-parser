@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package test;
+package ref;
 
 /**
  * This exception is thrown when parse errors are encountered.
