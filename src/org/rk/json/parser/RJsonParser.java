@@ -53,7 +53,7 @@ class RJsonParser implements RJsonConstants {
         String key;
         Object value;
         jj_consume_token(BRACE_OPEN);
-        RLogger.debug(RJsonParser.class,"jj_nt " + jj_nt + ", jj_nt.kind " + jj_nt.kind);
+        RLogger.debug(RJsonParser.class,"object()", "jj_nt " + jj_nt + ", jj_nt.kind " + jj_nt.kind);
         switch (jj_nt.kind) {
             case NUMBER_INTEGER:
             case NUMBER_DECIMAL:

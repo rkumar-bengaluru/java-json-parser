@@ -41,6 +41,7 @@ public class RJsonLexer implements RJsonConstants{
                  }
                  if ((jjtoToken[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L) {
                      matchedToken = jjFillToken();
+                     RLogger.debug(RJsonParser.class,"getNextToken()::Matched",matchedToken.toString());
                      return matchedToken;
                  } else {
                      continue EOFLoop;
@@ -163,18 +164,29 @@ public class RJsonLexer implements RJsonConstants{
         int startsAt = 0;
         int i = 1;
         int kind = 0x7fffffff;
+        boolean tokenFound = false;
+        int noOfCharacters = 1;
         
         for (;;) 
         {
-            if (curChar < 64) {
-                do {
+            // if (curChar < 64) {
+            //     do {
 
-                } while(i != startsAt);
-            } else if (curChar < 128) {
-                // 
-            } else {
+            //     } while(i != startsAt);
+            // } else if (curChar < 128) {
+            //     // 
+            // } else {
 
+            // }
+            switch(curChar) {
+                case 34: // '"'
+                    kind = RJsonConstants.STRING_DOUBLE_NONEMPTY;
+                    tokenFound = true;
+                    break;
+                default:
+                    break;
             }
+
             if (kind != 0x7fffffff) {
                 jjmatchedKind = kind;
                 jjmatchedPos = curPos;
