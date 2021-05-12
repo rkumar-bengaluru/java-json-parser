@@ -41,7 +41,7 @@ private final int jjStopStringLiteralDfa_0(int pos, long active0)
          if ((active0 & 0x400000L) != 0L)
             return 38;
          if ((active0 & 0x800000L) != 0L) {
-            RLogger.debug(NJSONParserTokenManager.class, "jjStopStringLiteralDfa_0(int pos, long active0)",(active0 & 0x800000L));
+            //RLogger.debug(NJSONParserTokenManager.class, "jjStopStringLiteralDfa_0(int pos, long active0)",(active0 & 0x800000L));
             return 39;
          }
          return -1;
@@ -98,7 +98,7 @@ private int jjMoveStringLiteralDfa0_0()
    switch(curChar)
    {
       case 34:
-         RLogger.debug(NJSONParserTokenManager.class,"jjMoveStringLiteralDfa0_0()" + curChar);
+         //RLogger.debug(NJSONParserTokenManager.class,"jjMoveStringLiteralDfa0_0()" + curChar);
          return jjMoveStringLiteralDfa1_0(0x800000L);
       case 39:
          return jjMoveStringLiteralDfa1_0(0x400000L);
@@ -156,7 +156,7 @@ private int jjMoveStringLiteralDfa1_0(long active0)
       default :
          break;
    }
-   RLogger.debug(NJSONParserTokenManager.class, "jjMoveStringLiteralDfa1_0(long active0)",curChar);
+   //RLogger.debug(NJSONParserTokenManager.class, "jjMoveStringLiteralDfa1_0(long active0)",curChar);
    return jjStartNfa_0(0, active0);
 }
 private int jjMoveStringLiteralDfa2_0(long old0, long active0)
@@ -249,21 +249,25 @@ private int jjMoveNfa_0(int startState, int curPos)
    int kind = 0x7fffffff;
    for (;;)
    {
-      RLogger.debug(NJSONParserTokenManager.class,"jjMoveNfa_0(int startState, int curPos)" , curChar);
       if (++jjround == 0x7fffffff)
          ReInitRounds();
       if (curChar < 64)
       {
+         
          long l = 1L << curChar;
          do
          {
-            switch(jjstateSet[--i])
+            int tmp = jjstateSet[--i];
+            RLogger.debug(NJSONParserTokenManager.class,"switch(jjstateSet[--i])" , "i=" + i + ",startsAt="+ startsAt  + ",curChar="+ curChar + ",jjstateSet[--i]=" + tmp);
+      
+            switch(tmp)
             {
                case 0:
                   if ((0x3ff000000000000L & l) != 0L)
                   {
                      if (kind > 28)
                         kind = 28;
+                     RLogger.debug(NJSONParserTokenManager.class,"switch(jjstateSet[--i])" ,"Matched Symbol");
                      jjCheckNAdd(15);
                   }
                   else if ((0x3400L & l) != 0L)
@@ -306,7 +310,7 @@ private int jjMoveNfa_0(int startState, int curPos)
                   break;
                case 39:
                case 11:
-                  RLogger.debug(NJSONParserTokenManager.class,"jjMoveNfa_0(int startState, int curPos)" , "breakpoint");
+                  //RLogger.debug(NJSONParserTokenManager.class,"jjMoveNfa_0(int startState, int curPos)" , "breakpoint");
                   if ((0xfffffffbffffc9ffL & l) != 0L)
                      jjCheckNAddStates(15, 17);
                   break;
@@ -575,7 +579,7 @@ private int jjMoveNfa_0(int startState, int curPos)
          jjmatchedKind = kind;
          jjmatchedPos = curPos;
          kind = 0x7fffffff;
-         RLogger.debug(NJSONParserTokenManager.class,"jjMoveNfa_0(int startState, int curPos)",jjmatchedKind);
+         //RLogger.debug(NJSONParserTokenManager.class,"jjMoveNfa_0(int startState, int curPos)",jjmatchedKind);
       }
       ++curPos;
       if ((i = jjnewStateCnt) == (startsAt = 38 - (jjnewStateCnt = startsAt)))
@@ -735,7 +739,7 @@ public Token getNextToken()
       }
       else
       {
-         RLogger.debug(NJSONParserTokenManager.class,"getNextToken() ", curChar);
+         //RLogger.debug(NJSONParserTokenManager.class,"getNextToken() ", curChar);
          continue EOFLoop;
       }
    }

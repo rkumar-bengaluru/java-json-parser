@@ -103,7 +103,7 @@ public class RJsonLexer implements RJsonConstants{
             case 116: // 't'
                 return jjMoveStringLiteralDfa1_0(0x20000L);
             default:
-                return -1;
+                return jjMoveNfa_0(0,0);
         }
     }
 
@@ -157,7 +157,7 @@ public class RJsonLexer implements RJsonConstants{
     }
 
     private final int jjStartNfa_0(int pos, long active0) {
-        return jjMoveNfa_0(39, pos + 1);
+        return jjMoveNfa_0(34, pos + 1);
     }
 
     private int jjMoveNfa_0(int startState, int curPos) {
@@ -169,24 +169,33 @@ public class RJsonLexer implements RJsonConstants{
         
         for (;;) 
         {
-            // if (curChar < 64) {
-            //     do {
-
-            //     } while(i != startsAt);
-            // } else if (curChar < 128) {
-            //     // 
-            // } else {
-
-            // }
-            switch(curChar) {
-                case 34: // '"'
-                    kind = RJsonConstants.STRING_DOUBLE_NONEMPTY;
-                    tokenFound = true;
-                    break;
-                default:
-                    break;
-            }
-
+            if (curChar < 64) {
+                switch(curChar) {
+                    case 34: // '"'
+                        kind = RJsonConstants.STRING_DOUBLE_NONEMPTY;
+                        tokenFound = true;
+                        break;
+                    case 48:
+                    case 49:
+                    case 50:
+                    case 51:
+                    case 52:
+                    case 53:
+                    case 54:
+                    case 55:
+                    case 56:
+                    case 57:
+                        break;
+                    case 46:
+                        break;
+                    default: 
+                        kind = RJsonConstants.NUMBER_DECIMAL;
+                        input_stream.backup(1);
+                        tokenFound = true;
+                        break;
+                }
+             }
+            
             if (kind != 0x7fffffff) {
                 jjmatchedKind = kind;
                 jjmatchedPos = curPos;

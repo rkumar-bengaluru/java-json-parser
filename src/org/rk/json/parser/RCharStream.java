@@ -102,6 +102,7 @@ public class RCharStream {
         if (inBuf > 0) {
             return buffer();
         }
+        tokenBegin = bufpos + 1;
         return readChar();
     }
 
@@ -126,14 +127,14 @@ public class RCharStream {
     }
 
     protected char ReadByte() throws java.io.IOException {
-        RLogger.debug(RCharStream.class, "ReadByte()", "nextCharInd ->" + nextCharInd + ", maxNextCharInd->" + maxNextCharInd);
+        //RLogger.debug(RCharStream.class, "ReadByte()", "nextCharInd ->" + nextCharInd + ", maxNextCharInd->" + maxNextCharInd);
         if (++nextCharInd >= maxNextCharInd)
             FillBuff();
         return nextCharBuf[nextCharInd];
     }
 
     protected void FillBuff() throws java.io.IOException {
-        RLogger.debug(RCharStream.class, "FillBuff()", "nextCharInd ->" + nextCharInd + ", maxNextCharInd->" + maxNextCharInd);
+        //RLogger.debug(RCharStream.class, "FillBuff()", "nextCharInd ->" + nextCharInd + ", maxNextCharInd->" + maxNextCharInd);
         int i;
         if (maxNextCharInd == 4096)
             maxNextCharInd = nextCharInd = 0;
@@ -176,6 +177,8 @@ public class RCharStream {
             default:
                 break;
         }
+        bufline[bufpos] = line;
+        bufcolumn[bufpos] = column;
     }
 
     private void checkBufferSize() {
@@ -235,10 +238,14 @@ public class RCharStream {
     }
 
     public String GetImage() {
+        RLogger.debug(RCharStream.class,"GetImage()" , "tokenBegin - " + tokenBegin + ", bufpos - " + bufpos);
+        String response = null;
         if (bufpos >= tokenBegin)
-            return new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
+            response =  new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
         else 
-             return new String(buffer, tokenBegin, bufsize - tokenBegin) + new String(buffer, 0, bufpos + 1);
+            response = new String(buffer, tokenBegin, bufsize - tokenBegin) + new String(buffer, 0, bufpos + 1);
+        RLogger.debug(RCharStream.class,"GetImage()" , response);
+        return response;
     }
 
     public int getEndColumn() {

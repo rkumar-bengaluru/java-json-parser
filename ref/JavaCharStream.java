@@ -19,6 +19,7 @@
 
 package ref;
 
+import org.rk.json.parser.*; 
 /**
  * An implementation of interface CharStream, where the stream is assumed to
  * contain only ASCII characters (with java-like unicode escape processing).
@@ -194,6 +195,7 @@ public class JavaCharStream
   {     
      if (inBuf > 0)
      {
+        //RLogger.debug(JavaCharStream.class, "BeginToken", "inBuf - " + bufpos);
         --inBuf;
 
         if (++bufpos == bufsize)
@@ -202,7 +204,7 @@ public class JavaCharStream
         tokenBegin = bufpos;
         return buffer[bufpos];
      }
-
+     //RLogger.debug(JavaCharStream.class, "BeginToken", "OutBuf- " + bufpos);
      tokenBegin = 0;
      bufpos = -1;
 
@@ -274,6 +276,7 @@ public class JavaCharStream
   {
      if (inBuf > 0)
      {
+        //RLogger.debug(JavaCharStream.class, "readChar", "inBuf - " + bufpos);
         --inBuf;
 
         if (++bufpos == bufsize)
@@ -281,7 +284,7 @@ public class JavaCharStream
 
         return buffer[bufpos];
      }
-
+      //RLogger.debug(JavaCharStream.class, "readChar", "OutBuf - " + bufpos);
      char c;
 
      if (++bufpos == available)
@@ -546,11 +549,15 @@ public class JavaCharStream
   /** @return token image as String */
   public String GetImage()
   {
+     RLogger.debug(JavaCharStream.class, "GetImage", "tokenBegin - " + tokenBegin + ",bufpos " + bufpos);
+     String response = null;
      if (bufpos >= tokenBegin)
-        return new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
+        response = new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
      else
-        return new String(buffer, tokenBegin, bufsize - tokenBegin) +
+         response = new String(buffer, tokenBegin, bufsize - tokenBegin) +
                               new String(buffer, 0, bufpos + 1);
+      RLogger.debug(JavaCharStream.class, "GetImage", response);
+      return response;
   }
 
   /** @return suffix */

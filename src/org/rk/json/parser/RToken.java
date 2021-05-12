@@ -116,6 +116,5 @@ public class RToken {
   {
      return newToken(ofKind, null);
   }
-
 }
 /* JavaCC - OriginalChecksum=570bb03034938b0b425402addab317e9 (do not edit this line) */
