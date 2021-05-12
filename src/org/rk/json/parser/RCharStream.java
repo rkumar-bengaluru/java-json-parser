@@ -24,6 +24,7 @@ public class RCharStream {
     protected boolean prevCharIsCR = false;
     protected boolean prevCharIsLF = false;
 
+    
 
     public RCharStream(java.io.Reader dstream,int startline, int startcolumn) {
         this(dstream, startline, startcolumn, 4096);
@@ -255,5 +256,7 @@ public class RCharStream {
     public int getBeginLine() {
         return bufline[tokenBegin];
     }
+
+   
 
 }

@@ -200,4 +200,12 @@ public class RJsonLexer implements RJsonConstants{
             catch(java.io.IOException e) { return curPos; }
         }
     }
+
+    public void ReInit(RCharStream stream)
+{
+//    jjmatchedPos = jjnewStateCnt = 0;
+//    curLexState = defaultLexState;
+//    input_stream = stream;
+   //ReInitRounds();
+}
 }
