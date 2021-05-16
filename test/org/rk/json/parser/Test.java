@@ -36,18 +36,22 @@ public class Test {
         try {
             JSONParser parser = new JSONParser();
             JSONArray a = (JSONArray) parser.parse(new FileReader("./test.json"));
-            //System.out.println(a.toString());
+            System.out.println(a.toString());
             char OPEN_BRACE ='{';
             char CLOSE_BRACE ='}';
             char SINGLE_QUOTE ='"';
             
-            System.out.println("int value of " + OPEN_BRACE + " = " + (int)OPEN_BRACE);  
-            System.out.println("int value of " + CLOSE_BRACE + " = " + (int)CLOSE_BRACE);  
+            System.out.println("0x800000L " + 0x800000L );  
+            System.out.println("Long.hexSting " + Long.toHexString(8388608)); 
+            System.out.println("0x400000L " + 0x400000L );  
+            System.out.println("Long.hexSting " + Long.toHexString(4194304));   
             System.out.println("int value of " + SINGLE_QUOTE + " = " + (int)SINGLE_QUOTE);  
             
            
 
-            String json = "{\"name\":\"sonoo\",\"salary\":600000.0,\"age\":27}";
+            //String json = "{\"name\":\"sonoo\",\"salary\":600000.0,\"age\":27}";
+            //String json = "{\"name\":\"sonoo\",\"age\":0.1}";
+            String json = "{\"name\":\"sonoo\",\"age\":0.1}";
             RJsonParser instance = new RJsonParser(json);
             System.out.println(instance.parse().toString());
         }catch(Exception e) {

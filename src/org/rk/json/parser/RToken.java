@@ -89,7 +89,7 @@ public class RToken {
    */
   public String toString()
   {
-     return image;
+     return "type=" + this.kind + ",image=" + image;
   }
 
   /**

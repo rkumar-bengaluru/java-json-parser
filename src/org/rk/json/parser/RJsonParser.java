@@ -59,6 +59,7 @@ public class RJsonParser implements RJsonConstants {
      * Parses any JSON-parsable object, returning the value.
      */
     public Object parse() throws RJsonException {
+      RLogger.debug(RJsonParser.class,"parse()" , "");
         Object toReturn = anything();
         if (!ensureEOF()) {
             throw new IllegalStateException("parser.expectedEOF");
@@ -89,6 +90,8 @@ public class RJsonParser implements RJsonConstants {
   }
 
   final public Object anything() throws RJsonException {
+    RLogger.debug(RJsonParser.class,"anything()" , jj_nt.toString());
+    
     Object x;
     switch (jj_nt.kind) {
     case BRACE_OPEN:
@@ -213,6 +216,7 @@ public class RJsonParser implements RJsonConstants {
 
   final public java.util.ArrayList<Object> list() throws RJsonException {
     final java.util.ArrayList<Object> list = new java.util.ArrayList<Object>();
+    RLogger.debug(RJsonParser.class,"list()" , jj_nt.toString());
     Object value;
     jj_consume_token(BRACKET_OPEN);
     switch (jj_nt.kind) {
@@ -327,7 +331,7 @@ public class RJsonParser implements RJsonConstants {
             if (nativeNumbers) {
                 {if (true) return Double.valueOf(t.image);}
             } else {
-                {if (true) return new java.math.BigInteger(substringBefore(t.image, '.'));}
+                {if (true) return Double.valueOf(t.image);}
             }
       break;
     default:
@@ -367,7 +371,7 @@ public class RJsonParser implements RJsonConstants {
     case STRING_DOUBLE_NONEMPTY:
       jj_consume_token(STRING_DOUBLE_NONEMPTY);
             String image = token.image;
-            {if (true) return image.substring(1, image.length() - 1);}
+            {if (true) return "\"" + image.substring(1, image.length() - 1) + "\"";}
       break;
     default:
       jj_la1[11] = jj_gen;
@@ -426,7 +430,9 @@ public class RJsonParser implements RJsonConstants {
   public RJsonParser(java.io.Reader stream) {
     jj_input_stream = new RCharStream(stream, 1, 1);
     token_source = new RJsonLexer(jj_input_stream);
+    
     token = new RToken();
+    RLogger.debug(RJsonParser.class,"constructor","");
     token.next = jj_nt = token_source.getNextToken();
     jj_gen = 0;
     for (int i = 0; i < 13; i++) jj_la1[i] = -1;
