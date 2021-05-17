@@ -15,6 +15,26 @@ public class AbstractLexer {
         this.input_stream = input;
     }
 
+    protected void checkForSpace() {
+        System.err.println("checkForSpace" + curChar);
+        if(curChar == 32) {
+            try { 
+             curChar = input_stream.readChar(); 
+            } catch(java.io.IOException e) {
+                e.printStackTrace();
+                stopStringLiteralAt(0, 0);
+            }
+            if(curChar != 32) {
+                System.err.println("checkForSpace" + curChar);
+                input_stream.backup(1);
+                return;
+            } else {
+                checkForSpace();
+            }
+        }
+        System.err.println("checkForSpace" + curChar);
+    }
+
     protected RToken fillToken() {
         final RToken t;
         final String tokenImage;
@@ -36,11 +56,11 @@ public class AbstractLexer {
         return t;
     }
 
-    protected int findStringLiteral(int curPos, long active0,int startState) {
+    protected int findStringLiteral(int curPos, long active0) {
         int startsAt = 0;
-        jjnewStateCnt = 1;
+        
         int i = 1;
-        jjstateSet[0] = startState;
+        
         int kind = 0x7fffffff;
         
         try { 
@@ -54,6 +74,7 @@ public class AbstractLexer {
             RLogger.debug(AbstractLexer.class,"findStringLiteral()",curChar);
             switch(curChar) {
                 case 34: // '"'
+                    RLogger.debug(AbstractLexer.class,"-----",curChar);
                     kind = RJsonConstants.STRING_DOUBLE_NONEMPTY;
                     break;
                 default:
@@ -69,7 +90,7 @@ public class AbstractLexer {
             try {
                 curChar = input_stream.readChar();
             } catch (java.io.IOException e) {
-                return pos;
+                return curPos;
             }
             
         }
@@ -83,6 +104,7 @@ public class AbstractLexer {
             stopStringLiteralAt(0, active0);
             return 1;
         }
+        System.err.println("moveChar01::curChar=" + curChar);
         switch(curChar) {
             case 34: // '"'
                 if ((active0 & 0x800000L) != 0L)
@@ -94,7 +116,9 @@ public class AbstractLexer {
                 break;
             case 65: // 'A'
             case 97: // 'a'
-                return moveChar02(active0, 0x40000L);
+                if ((active0 & 0x40000L) != 0L)
+                    return moveChar02(active0, 0x40000L);
+                break;
             case 82: // 'R'
             case 114: // 'r'
                 return moveChar02(active0, 0x20000L);

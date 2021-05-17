@@ -51,8 +51,8 @@ public class Test {
 
             //String json = "{\"name\":\"sonoo\",\"salary\":600000.0,\"age\":27}";
             //String json = "{\"name\":\"sonoo\",\"age\":0.1}";
-            String json = " {\"name\":\"sonoo\",\"age\":{\"age\":\"2\"}}";
-            RJsonParser instance = new RJsonParser(json);
+            String json = "         {\"name\":\"son oo\",\"age\":{\"age\":\"2\"}}";
+            RJsonParser instance = new RJsonParser(a.toString());
             StringBuilder builder = new StringBuilder();
             instance.parse().toString(builder);
             System.out.println(builder.toString());
