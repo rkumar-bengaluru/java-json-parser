@@ -11,7 +11,7 @@ public class RefTest {
     public static void main(String[] args) {
         try {
             //String json = "{\"name\":\"sonoo\",\"salary\":600000.0,\"age\":27}";
-            String json = "{\"age\":27}";
+            String json = " {\"name\":\"sonoo\",\"age\": {\"age\":\"2\"}}";
             NJSONParser instance = new NJSONParser(json);
             System.out.println(instance.parse());
         }catch(Exception e) {

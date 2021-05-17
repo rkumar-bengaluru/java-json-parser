@@ -173,6 +173,7 @@ public class RJsonParser implements RJsonConstants {
     JsonObject key;
     JsonObject value;
     jj_consume_token(BRACE_OPEN);
+    RLogger.debug(RJsonParser.class,"object()" , jj_nt.kind);
     switch (jj_nt.kind) {
     case NUMBER_INTEGER:
     case NUMBER_DECIMAL:
@@ -464,6 +465,7 @@ public class RJsonParser implements RJsonConstants {
     RToken oldToken = token;
     if ((token = jj_nt).next != null) jj_nt = jj_nt.next;
     else jj_nt = jj_nt.next = token_source.getNextToken();
+    RLogger.debug(RJsonParser.class,"jj_consume_token",token.kind + "," + kind);
     if (token.kind == kind) {
       jj_gen++;
       return token;

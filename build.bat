@@ -9,5 +9,5 @@ javac -d bin test/org/rk/json/parser/*.java
 
 javac -d bin ref/*.java
 
-java org.rk.json.parser.Test
+java org.rk.json.parser.RefTest
 

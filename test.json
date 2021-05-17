@@ -1,20 +1,59 @@
-[  
-    {  
-        "name":"John",
-        "city":"Berlin",
-        "cars":[  
-            "audi",
-            "bmw"
-        ],
-        "job":"Teacher"
+{
+    "brandName":"Apacs",
+    "productId":"ENJMZAXX2",
+    "marketplace":{
+       "amazon":"B08HKCCWPD",
+       "flipkartPrice":"1700",
+       "flipkart":"itme?pid=Naaaaaa",
+       "amazonPrice":"1799"
     },
-    {  
-        "name":"Mark",
-        "city":"Oslo",
-        "cars":[  
-            "VW",
-            "Toyata"
-        ],
-        "job":"Doctor"
-    }
-]
+    "salePrice":"1699",
+    "searchTerms":"APACS  Finapi 262 Unstrung Badminton Racquet,apacs badminton racquet,finapi 262",
+    "numOfImages":"5",
+    "Title":"APACSâ\u201E¢  Finapi 262 Unstrung Badminton Racquet",
+    "mrp":"4299",
+    "keyFeatures":[
+       "Material: High Modulus Graphite",
+       "Weight : 85-87g (4U) || Balance : 285 || Flex : 8.5 || Max Tension : 38 LBS",
+       "The use of isometric head frame equalizes the strings in the string bed to deliver perfect shots",
+       "Power Frame Series",
+       "In-Box Contents: 1 Piece Badminton Racket"
+    ],
+    "manufacturer":"APACS AMG Sports WVN Mano 2nd Floor No 62138 Santhome Road Chennai  600004 Contact 8939742090 amgsports2006gmailcom",
+    "productCategory":"\/Sports & Fitness\/Badminton\/Yonex\/Racquet",
+    "hsncode":"9506",
+    "productTaxCode":"12",
+    "ratings":{
+       "threestar":"5",
+       "fivestar":"10",
+       "reviews":[
+          {
+             "date":"19\/03\/2021",
+             "heading":"Awesome Product",
+             "ratings":"5",
+             "comment":"Excelleent racket"
+          },
+          {
+             "date":"19\/03\/2021",
+             "heading":"...Best racquet in the world",
+             "ratings":"4",
+             "comment":"light weight racket good handling Grip size is good for average hands you don't mind price this price is good for this racket"
+          },
+          {
+             "date":"10\/01\/2021",
+             "heading":"Will buy again...",
+             "ratings":"3",
+             "comment":"Good Buy will buy again"
+          }
+       ],
+       "onestar":"0",
+       "fourstar":"5",
+       "twostar":"0"
+    },
+    "listingStatus":"Active",
+    "countryOfOrigin":"Thailand",
+    "stock":"0",
+    "SEO":"\/blog\/badminton.html",
+    "maxOrderQuantity":"1",
+    "productDescription":"The use of isometric head frame equalizes the strings in the string bed to deliver perfect shots Aero wide body head helps in faster swing and great feel while smashing The frame and the shaft is made using hi modulus graphite material which offers good strength to the racquet The grip size is g2 which will help in great control The medium stiff flex helps in the delivering powerful shots with brilliant control at the same time The string tension is about 38 lbs with g2 grip size which offers even balance while delivering the shots The length and light weight of these racquets are ideal for perfect swings in all directions"
+ }

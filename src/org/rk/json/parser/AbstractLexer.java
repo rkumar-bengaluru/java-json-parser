@@ -36,6 +36,46 @@ public class AbstractLexer {
         return t;
     }
 
+    protected int findStringLiteral(int curPos, long active0,int startState) {
+        int startsAt = 0;
+        jjnewStateCnt = 1;
+        int i = 1;
+        jjstateSet[0] = startState;
+        int kind = 0x7fffffff;
+        
+        try { 
+             curChar = input_stream.readChar(); 
+        } catch(java.io.IOException e) {
+            stopStringLiteralAt(0, active0);
+            return 1;
+        }
+        
+        for (;;) {
+            RLogger.debug(AbstractLexer.class,"findStringLiteral()",curChar);
+            switch(curChar) {
+                case 34: // '"'
+                    kind = RJsonConstants.STRING_DOUBLE_NONEMPTY;
+                    break;
+                default:
+                    break;
+            }
+            ++curPos;
+            if (kind != 0x7fffffff) {
+                jjmatchedKind = kind;
+                jjmatchedPos = curPos;
+                return curPos;
+            }
+            
+            try {
+                curChar = input_stream.readChar();
+            } catch (java.io.IOException e) {
+                return pos;
+            }
+            
+        }
+        
+    }
+
     protected int moveChar01(long active0) {
         try { 
              curChar = input_stream.readChar(); 
@@ -65,7 +105,7 @@ public class AbstractLexer {
                 break;
         }
         RLogger.debug(RJsonLexer.class, "moveChar01()" , "searching for \"");
-        return jjStartNfa_0(0, active0);
+        return findStringLiteral(0, active0);
     }
 
     protected int moveChar02(long old0, long active0) {

@@ -239,7 +239,7 @@ static final long[] jjbitVec2 = {
 };
 private int jjMoveNfa_0(int startState, int curPos)
 {
-   RLogger.debug(NJSONParserTokenManager.class,"jjMoveNfa_0(int startState, int curPos)" , startState);
+   RLogger.debug(NJSONParserTokenManager.class,"jjMoveNfa_0(int startState, int curPos)" , curChar);
    //int[] nextStates; // not used
    int startsAt = 0;
    jjnewStateCnt = 38;
@@ -263,6 +263,7 @@ private int jjMoveNfa_0(int startState, int curPos)
             switch(tmp)
             {
                case 0:
+                RLogger.debug(NJSONParserTokenManager.class,"------------" , curChar);
                   if ((0x3ff000000000000L & l) != 0L)
                   {
                      if (kind > 28)
@@ -301,6 +302,8 @@ private int jjMoveNfa_0(int startState, int curPos)
                      if (kind > 15)
                         kind = 15;
                      jjCheckNAddStates(9, 11);
+                  } else if (curChar == 32) {
+                     RLogger.debug(NJSONParserTokenManager.class,"------------" , "found space charcter");
                   }
                   break;
                case 38:

@@ -35,7 +35,7 @@ public class Test {
     public static void main(String[] args) {
         try {
             JSONParser parser = new JSONParser();
-            JSONArray a = (JSONArray) parser.parse(new FileReader("./test.json"));
+            JSONObject a = (JSONObject) parser.parse(new FileReader("./test.json"));
             System.out.println(a.toString());
             char OPEN_BRACE ='{';
             char CLOSE_BRACE ='}';
@@ -51,10 +51,10 @@ public class Test {
 
             //String json = "{\"name\":\"sonoo\",\"salary\":600000.0,\"age\":27}";
             //String json = "{\"name\":\"sonoo\",\"age\":0.1}";
-            String json = "{\"name\":\"sonoo\",\"age\":0.1}";
+            String json = " {\"name\":\"sonoo\",\"age\":{\"age\":\"2\"}}";
             RJsonParser instance = new RJsonParser(json);
             StringBuilder builder = new StringBuilder();
-            instance.parse().toHtml(builder);
+            instance.parse().toString(builder);
             System.out.println(builder.toString());
         }catch(Exception e) {
             e.printStackTrace();
