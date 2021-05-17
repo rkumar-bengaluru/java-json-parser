@@ -1,8 +1,7 @@
 
 package org.rk.json.parser;
-public class RJsonLexer extends NumberLexer implements RJsonConstants {
 
-    
+public class RJsonLexer extends NumberLexer implements RJsonConstants {
 
     public RJsonLexer(RCharStream input) {
         super(input);
@@ -82,7 +81,6 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
             case 58: // ':'
                 return stopAtPos(0, RJsonConstants.COLON);
             case 91: // '['
-                RLogger.debug(RJsonParser.class,"------------",""); 
                 return stopAtPos(0, RJsonConstants.BRACKET_OPEN);
             case 93: // ']'
                 return stopAtPos(0, RJsonConstants.BRACKET_CLOSE);

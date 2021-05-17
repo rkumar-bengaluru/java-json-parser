@@ -53,7 +53,9 @@ public class Test {
             //String json = "{\"name\":\"sonoo\",\"age\":0.1}";
             String json = "{\"name\":\"sonoo\",\"age\":0.1}";
             RJsonParser instance = new RJsonParser(json);
-            System.out.println(instance.parse().toString());
+            StringBuilder builder = new StringBuilder();
+            instance.parse().toHtml(builder);
+            System.out.println(builder.toString());
         }catch(Exception e) {
             e.printStackTrace();
         }
