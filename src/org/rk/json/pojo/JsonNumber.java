@@ -2,11 +2,11 @@ package org.rk.json.pojo;
 
 import java.io.IOException;
 
-public class JsonInteger extends JsonObject {
+public class JsonNumber extends JsonObject {
     
-    private Double value;
+    private String value;
 
-    public JsonInteger(JsonObjType type, Double value) {
+    public JsonNumber(JsonObjType type, String value) {
         super(type);
         if (value == null || type == null) {
 			throw new IllegalArgumentException("type || value is null.");
@@ -16,12 +16,12 @@ public class JsonInteger extends JsonObject {
     }
     @Override
     public void toString(Appendable destination) throws IOException {
-        destination.append(value.toString());
+        destination.append(value);
     }
     @Override
     public void toHtml(Appendable destination) throws IOException {
         destination.append("<span class=\"integer\">");
-        destination.append(value.toString());
+        destination.append(value);
         destination.append("</span>");
     }
 
