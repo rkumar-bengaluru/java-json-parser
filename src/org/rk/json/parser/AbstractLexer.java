@@ -121,10 +121,14 @@ public class AbstractLexer {
                 break;
             case 82: // 'R'
             case 114: // 'r'
-                return moveChar02(active0, 0x20000L);
+                if ((active0 & 0x20000L) != 0L)
+                    return moveChar02(active0, 0x20000L);
+                break;
             case 85: // 'U'
             case 117: // 'u'
-                return moveChar02(active0, 0x80000L);
+                if ((active0 & 0x80000L) != 0L)
+                    return moveChar02(active0, 0x80000L);
+                break;
             default:
                 break;
         }
@@ -285,7 +289,7 @@ public class AbstractLexer {
     }
 
 
-    private final int stopStringLiteralAt(int pos, long active0) {
+    protected final int stopStringLiteralAt(int pos, long active0) {
         switch (pos) {
             case 0:
                 if ((active0 & 0xe0000L) != 0L) {

@@ -67,16 +67,24 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
 
 
     protected int analyzeCurrentCharacter() {
-        System.err.println("-------------");
-        checkForSpace();
-        System.err.println("-------------analyzeCurrentCharacter - " + curChar);
+        
+        if (curChar == ' ' || curChar == '\t' || curChar == '\n' || curChar == '\r') {
+            consume_char();
+            try { 
+             curChar = input_stream.readChar(); 
+            } catch(java.io.IOException e) {
+                stopStringLiteralAt(0, 0);
+                return 1;
+            }
+            analyzeCurrentCharacter();
+        }
+
         switch(curChar) {
             case 123: // '{'
                 return stopAtPos(0, RJsonConstants.BRACE_OPEN);
             case 125: // '}'
                 return stopAtPos(0, RJsonConstants.BRACE_CLOSE);
             case 34: // '"'
-                System.err.println("-------------analyzeCurrentCharacter - " + curChar);
                 return moveChar01(0x800000L);
             case 39: // '\''
                 return moveChar01(0x40000L);
@@ -98,8 +106,14 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
             case 116: // 't'
                 return moveChar01(0x20000L);
             default:
-                System.out.println("got to default..");
                 return findInteger(0,0);
+        }
+    }
+
+    protected void consume_char() {
+        assert curChar != -1;
+        char res = (char) curChar;
+        if (curChar == '\n') {
         }
     }
 
