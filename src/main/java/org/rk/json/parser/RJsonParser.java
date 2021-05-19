@@ -61,7 +61,7 @@ public class RJsonParser implements RJsonConstants {
      * Parses any JSON-parsable object, returning the value.
      */
     public JsonObject parse() throws RJsonException {
-      RLogger.debug(RJsonParser.class,"parse()" , "");
+      //RLogger.getLogger(RJsonParser.class).info("parse()" + "");
         JsonObject toReturn = anything();
         if (!ensureEOF()) {
             throw new IllegalStateException("parser.expectedEOF");
@@ -92,7 +92,7 @@ public class RJsonParser implements RJsonConstants {
   }
 
   final public JsonObject anything() throws RJsonException {
-    RLogger.debug(RJsonParser.class,"anything()" , jj_nt.toString());
+    //RLogger.getLogger(RJsonParser.class).info("anything()" + jj_nt.toString());
     
     JsonObject x;
     switch (jj_nt.kind) {
@@ -173,7 +173,7 @@ public class RJsonParser implements RJsonConstants {
     JsonObject key;
     JsonObject value;
     jj_consume_token(BRACE_OPEN);
-    RLogger.debug(RJsonParser.class,"object()" , jj_nt.kind);
+    //RLogger.getLogger(RJsonParser.class).info("object()" + jj_nt.kind);
     switch (jj_nt.kind) {
     case NUMBER_INTEGER:
     case NUMBER_DECIMAL:
@@ -219,7 +219,7 @@ public class RJsonParser implements RJsonConstants {
 
   final public JsonList list() throws RJsonException {
     final JsonList list = new JsonList(JsonObjType.LIST);
-    RLogger.debug(RJsonParser.class,"list()" , jj_nt.toString());
+    //RLogger.getLogger(RJsonParser.class).info("list()" + jj_nt.toString());
     JsonObject value;
     jj_consume_token(BRACKET_OPEN);
     switch (jj_nt.kind) {
@@ -318,23 +318,23 @@ public class RJsonParser implements RJsonConstants {
     throw new Error("Missing return statement in function");
   }
 
-  final public JsonInteger number() throws RJsonException {
+  final public JsonNumber number() throws RJsonException {
     RToken t;
     switch (jj_nt.kind) {
     case NUMBER_DECIMAL:
       t = jj_consume_token(NUMBER_DECIMAL);
             if (nativeNumbers) {
-                {if (true) return new JsonInteger(JsonObjType.INTEGER, Double.valueOf(t.image));}
+                {if (true) return new JsonNumber(JsonObjType.NUMBER, t.image);}
             } else {
-                {if (true) return new JsonInteger(JsonObjType.INTEGER, Double.valueOf(t.image));}
+                {if (true) return new JsonNumber(JsonObjType.NUMBER, t.image);}
             }
       break;
     case NUMBER_INTEGER:
       t = jj_consume_token(NUMBER_INTEGER);
             if (nativeNumbers) {
-                {if (true) return new JsonInteger(JsonObjType.INTEGER, Double.valueOf(t.image));}
+                {if (true) return new JsonNumber(JsonObjType.NUMBER, t.image);}
             } else {
-                {if (true) return new JsonInteger(JsonObjType.INTEGER, Double.valueOf(t.image));}
+                {if (true) return new JsonNumber(JsonObjType.NUMBER, t.image);}
             }
       break;
     default:
@@ -435,7 +435,6 @@ public class RJsonParser implements RJsonConstants {
     token_source = new RJsonLexer(jj_input_stream);
     
     token = new RToken();
-    RLogger.debug(RJsonParser.class,"constructor","");
     token.next = jj_nt = token_source.getNextToken();
     jj_gen = 0;
     for (int i = 0; i < 13; i++) jj_la1[i] = -1;
@@ -465,7 +464,7 @@ public class RJsonParser implements RJsonConstants {
     RToken oldToken = token;
     if ((token = jj_nt).next != null) jj_nt = jj_nt.next;
     else jj_nt = jj_nt.next = token_source.getNextToken();
-    RLogger.debug(RJsonParser.class,"jj_consume_token",token.kind + "," + kind);
+    //RLogger.debug(RJsonParser.class,"jj_consume_token",token.kind + "," + kind);
     if (token.kind == kind) {
       jj_gen++;
       return token;

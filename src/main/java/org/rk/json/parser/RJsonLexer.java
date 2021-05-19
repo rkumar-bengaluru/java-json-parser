@@ -24,14 +24,14 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
             jjmatchedKind = 0x7fffffff;
             jjmatchedPos = 0;
             curPos = analyzeCurrentCharacter();
-            //RLogger.debug(RJsonLexer.class, "jjmatchedKind()", "jjmatchedKind" + jjmatchedKind );
+            //RLogger.getLogger(RJsonLexer.class).info( "jjmatchedKind()" + "jjmatchedKind" + jjmatchedKind );
             if (jjmatchedKind != 0x7fffffff) {
                  if (jjmatchedPos + 1 < curPos) {
                      input_stream.backup(curPos - jjmatchedPos - 1); // possible backtracking.
                  }
                  if ((jjtoToken[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L) {
                      matchedToken = fillToken();
-                     RLogger.debug(RJsonParser.class,"getNextToken()::Matched",matchedToken.toString());
+                     //RLogger.getLogger(RJsonLexer.class).info("getNextToken()::Matched" + matchedToken.toString());
                      return matchedToken;
                  } else {
                      continue EOFLoop;
@@ -73,7 +73,6 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
             try { 
              curChar = input_stream.readChar(); 
             } catch(java.io.IOException e) {
-                stopStringLiteralAt(0, 0);
                 return 1;
             }
             analyzeCurrentCharacter();
@@ -106,7 +105,7 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
             case 116: // 't'
                 return moveChar01(0x20000L);
             default:
-                return findInteger(0,0);
+                return findNumber(0,0);
         }
     }
 
@@ -117,14 +116,11 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
         }
     }
 
-
-
-
     public void ReInit(RCharStream stream)
-{
-//    jjmatchedPos = jjnewStateCnt = 0;
-//    curLexState = defaultLexState;
-//    input_stream = stream;
-   //ReInitRounds();
-}
+    {
+    //    jjmatchedPos = jjnewStateCnt = 0;
+    //    curLexState = defaultLexState;
+    //    input_stream = stream;
+    //ReInitRounds();
+    }
 }

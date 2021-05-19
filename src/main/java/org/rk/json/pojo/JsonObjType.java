@@ -6,7 +6,6 @@ public enum JsonObjType {
     BOOLEAN,
     NUMBER,
     NULL,
-    INTEGER,
     FLOAT,
     STRING,
     DOUBLE

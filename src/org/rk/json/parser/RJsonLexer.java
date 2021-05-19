@@ -1,7 +1,7 @@
 
 package org.rk.json.parser;
 
-public class RJsonLexer extends NumberLexer implements RJsonConstants {
+public class RJsonLexer extends NumberLexer implements RJsonConstants 
 
     public RJsonLexer(RCharStream input) {
         super(input);
