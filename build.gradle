@@ -1,15 +1,9 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'application'
-
-description = "Java Json Parser"
-
-configurations {
-    
-   externalLibs
+plugins {
+    id 'java-library'
 }
 
-mainClassName = 'org.rk.json.parser.RJsonLexerMain'
+description = "Java Json Parser"
+//mainClassName = 'org.rk.json.parser.RJsonLexerMain'
 
 test {
     useJUnit()
@@ -35,8 +29,10 @@ targetCompatibility = 1.8
 
 dependencies {
     testImplementation "junit:junit:4.12"
-    runtimeOnly files('libs/json-simple-1.1.1.jar')
-    externalLibs files('./lib/json-simple-1.1.1.jar')
+    implementation files('lib/json-simple-1.1.1.jar')
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
+implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
+    
 }
 // end::dependencies[]
 
