@@ -1,6 +1,6 @@
 package org.rk.json.parser;
 
-public class NumberLexer extends AbstractLexer {
+public class NumberLexer extends AbstractJsonLexer {
     int curLexState = 0;
     int defaultLexState = 0;
     int jjnewStateCnt;
@@ -13,44 +13,41 @@ public class NumberLexer extends AbstractLexer {
         super(input);
     }
 
-    public int findInteger(int startState, int curPos) {
-        //int[] nextStates; // not used
-        int startsAt = 0;
-        jjnewStateCnt = 1;
-        int i = 1;
-        jjstateSet[0] = startState;
-        //int j; // not used
-        int kind = 0x7fffffff;
-        for (;;) {
-            if (curChar < 64) {
-                RLogger.debug(NumberLexer.class, "findInteger()", "i=" + i + ",startsAt=" + startsAt + ",curChar=" + curChar);
-                long l = 1L << curChar;
-                do {
-                    switch (jjstateSet[--i]) {
-                        case 0:
-                            kind = RJsonConstants.NUMBER_INTEGER;
-                            jjstateSet[jjnewStateCnt++] = 0;
-                            RLogger.debug(NumberLexer.class, "findInteger()", "i=" + i + ",startsAt=" + startsAt + ",curChar=" + curChar + ",kind=" + kind);
-                            break;
-                        default:
-                            break;
-                    }
-                } while (i != startsAt);
-            }
-            if (kind != 0x7fffffff) {
-                jjmatchedKind = kind;
-                jjmatchedPos = curPos;
-                kind = 0x7fffffff;
-            }
+    private boolean isDigit() {
+        RLogger.getLogger(NumberLexer.class).info( "\"" + curChar + "\"");
+        if(curChar == 46) {
+            return true;
+        }
+
+        if( curChar > 47 && curChar < 58) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public int findNumber(int startState, int curPos) {
+        RLogger.getLogger(NumberLexer.class).info( "\"" + curChar + "\"");
+        while(isDigit()) {
             ++curPos;
-            if ((i = jjnewStateCnt) == (startsAt = 1 - (jjnewStateCnt = startsAt)))
-                return curPos;
             try {
                 curChar = input_stream.readChar();
             } catch (java.io.IOException e) {
                 return curPos;
             }
         }
-    }
+        RLogger.getLogger(NumberLexer.class).info("\"" + curChar + "\"");
+        // only expected curChar is ',' || '}'
+        if(curChar == 44 || curChar == 125) {
+            --curPos;
+            RLogger.getLogger(NumberLexer.class).info("\"" + curChar + "\"");
+            jjmatchedKind = RJsonConstants.NUMBER_INTEGER;
+            jjmatchedPos = curPos;
+            input_stream.backup(1);
+            return curPos;
+        }
 
+        // not a valid numbers
+        return curPos;
+    }
 }
