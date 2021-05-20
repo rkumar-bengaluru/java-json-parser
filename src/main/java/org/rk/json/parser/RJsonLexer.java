@@ -1,35 +1,39 @@
 
 package org.rk.json.parser;
 
-public class RJsonLexer extends NumberLexer implements RJsonConstants {
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
-    public RJsonLexer(RCharStream input) {
+public class RJsonLexer extends NumberLexer implements RJsonConstants {
+    static Logger logger = LogManager.getLogger();
+    public RJsonLexer(RJsonCharStream input) {
         super(input);
     }
 
-    public RToken getNextToken() {
-        RToken matchedToken = null;
+    public RJsonToken getNextToken() {
+        RJsonToken matchedToken = null;
         int curPos = 0;
 
         EOFLoop :
         for(;;) {
             try {     
-                curChar = input_stream.BeginToken();
+                curChar = input_stream.beginToken();
             } catch(java.io.IOException e) {        
-                jjmatchedKind = 0;
+                matchedKind = 0;
                 matchedToken = fillToken();
                 return matchedToken;
             }
 
-            jjmatchedKind = 0x7fffffff;
-            jjmatchedPos = 0;
+            matchedKind = 0x7fffffff;
+            matchedPos = 0;
             curPos = analyzeCurrentCharacter();
-            //RLogger.getLogger(RJsonLexer.class).info( "jjmatchedKind()" + "jjmatchedKind" + jjmatchedKind );
-            if (jjmatchedKind != 0x7fffffff) {
-                 if (jjmatchedPos + 1 < curPos) {
-                     input_stream.backup(curPos - jjmatchedPos - 1); // possible backtracking.
+            //System.out.println( "matchedKind()" + "matchedKind" + matchedKind );
+            //logger.debug( "matchedKind()" + "matchedKind" + matchedKind );
+            if (matchedKind != 0x7fffffff) {
+                 if (matchedPos + 1 < curPos) {
+                     input_stream.backup(curPos - matchedPos - 1); // possible backtracking.
                  }
-                 if ((jjtoToken[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L) {
+                 if ((toToken[matchedKind >> 6] & (1L << (matchedKind & 077))) != 0L) {
                      matchedToken = fillToken();
                      //RLogger.getLogger(RJsonLexer.class).info("getNextToken()::Matched" + matchedToken.toString());
                      return matchedToken;
@@ -61,7 +65,7 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
                 error_after = curPos <= 1 ? "" : input_stream.GetImage();
             }
 
-            throw new RTokenMgrError(EOFSeen, curLexState, error_line, error_column, error_after, curChar, RTokenMgrError.LEXICAL_ERROR);
+            throw new RJsonTokenMgrError(EOFSeen, curLexState, error_line, error_column, error_after, curChar, RJsonTokenMgrError.LEXICAL_ERROR);
         }
     }
 
@@ -116,7 +120,7 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
         }
     }
 
-    public void ReInit(RCharStream stream)
+    public void ReInit(RJsonCharStream stream)
     {
     //    jjmatchedPos = jjnewStateCnt = 0;
     //    curLexState = defaultLexState;

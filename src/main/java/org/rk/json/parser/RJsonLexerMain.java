@@ -10,11 +10,17 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class RJsonLexerMain {
+    static Logger logger = LogManager.getLogger(RJsonLexerMain.class);
 
     public static void main(String[] args) {
         try {
+            System.out.println(logger.isDebugEnabled());
+            logger.error("starting...");
+            System.out.println("Starting...");
             JSONParser parser = new JSONParser();
             JSONObject a = (JSONObject) parser.parse(new FileReader("./test.json"));
             //System.out.println(a.toString());

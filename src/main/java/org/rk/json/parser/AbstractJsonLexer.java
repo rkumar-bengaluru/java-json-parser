@@ -2,17 +2,17 @@ package org.rk.json.parser;
 
 
 public class AbstractJsonLexer {
-    public static final String[] jjstrLiteralImages = {
+    private static final String[] strLiteralImages = {
         "", null, null, null, null, null, "\54", "\173", "\175", "\72", "\133", 
         "\135", null, null, null, null, null, null, null, null, null, null, "\47\47", 
         "\42\42", null, null, null, null, null, };
-    static final long[] jjtoToken = { 0x1ccf8fc1L, };
-    protected RCharStream input_stream;
+    static final long[] toToken = { 0x1ccf8fc1L, };
+    protected RJsonCharStream input_stream;
     protected char curChar;
-    protected int jjmatchedKind;
-    protected int jjmatchedPos;
+    protected int matchedKind;
+    protected int matchedPos;
     
-    public AbstractJsonLexer(RCharStream input) {
+    public AbstractJsonLexer(RJsonCharStream input) {
         this.input_stream = input;
     }
 
@@ -33,20 +33,20 @@ public class AbstractJsonLexer {
         //RLogger.getLogger(AbstractJsonLexer.class).info("checkForSpace" + curChar);
     }
 
-    protected RToken fillToken() {
-        final RToken t;
+    protected RJsonToken fillToken() {
+        final RJsonToken t;
         final String tokenImage;
         final int beginLine;
         final int endLine;
         final int beginColumn;
         final int endColumn;
-        String im = jjstrLiteralImages[jjmatchedKind];
+        String im = strLiteralImages[matchedKind];
         tokenImage = (im == null) ? input_stream.GetImage() : im;
         beginLine = input_stream.getBeginLine();
         beginColumn = input_stream.getBeginColumn();
         endLine = input_stream.getEndLine();
         endColumn = input_stream.getEndColumn();
-        t = RToken.newToken(jjmatchedKind, tokenImage);
+        t = RJsonToken.newToken(matchedKind, tokenImage);
         t.beginLine = beginLine;
         t.endLine = endLine;
         t.beginColumn = beginColumn;
@@ -73,8 +73,8 @@ public class AbstractJsonLexer {
             }
             ++curPos;
             if (kind != 0x7fffffff) {
-                jjmatchedKind = kind;
-                jjmatchedPos = curPos;
+                matchedKind = kind;
+                matchedPos = curPos;
                 return curPos;
             }
             
@@ -195,8 +195,8 @@ public class AbstractJsonLexer {
     }
 
     protected int stopAtPos(int pos, int kind) {
-        jjmatchedKind = kind;
-        jjmatchedPos = pos;
+        matchedKind = kind;
+        matchedPos = pos;
         return pos + 1;
     }
 }

@@ -3,7 +3,7 @@ package org.rk.json.parser;
  * Describes the input token stream.
  */
 
-public class RToken {
+public class RJsonToken {
 
   /**
    * An integer that describes the kind of this token.  This numbering
@@ -34,7 +34,7 @@ public class RToken {
    * token.  Otherwise, see below for a description of the contents of
    * this field.
    */
-  public RToken next;
+  public RJsonToken next;
 
   /**
    * This field is used to access special tokens that occur prior to this
@@ -48,7 +48,7 @@ public class RToken {
    * immediately follow it (without an intervening regular token).  If there
    * is no such token, this field is null.
    */
-  public RToken specialToken;
+  public RJsonToken specialToken;
 
   /**
    * An optional attribute value of the Token.
@@ -65,12 +65,12 @@ public class RToken {
   /**
    * No-argument contructor
    */
-  public RToken() {}
+  public RJsonToken() {}
 
   /**
    * Constructs a new token for the specified Image.
    */
-  public RToken(int kind)
+  public RJsonToken(int kind)
   {
      this(kind, null);
   }
@@ -78,7 +78,7 @@ public class RToken {
   /**
    * Constructs a new token for the specified Image and Kind.
    */
-  public RToken(int kind, String image)
+  public RJsonToken(int kind, String image)
   {
      this.kind = kind;
      this.image = image;
@@ -104,17 +104,17 @@ public class RToken {
    * to the following switch statement. Then you can cast matchedToken
    * variable to the appropriate type and use sit in your lexical actions.
    */
-  public static RToken newToken(int ofKind, String image)
+  public static RJsonToken newToken(int ofKind, String image)
   {
      switch(ofKind)
      {
-       default : return new RToken(ofKind, image);
+       default : return new RJsonToken(ofKind, image);
      }
   }
 
-  public static RToken newToken(int ofKind)
+  public static RJsonToken newToken(int ofKind)
   {
      return newToken(ofKind, null);
   }
 }
-/* JavaCC - OriginalChecksum=570bb03034938b0b425402addab317e9 (do not edit this line) */
+

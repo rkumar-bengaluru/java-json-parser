@@ -27,9 +27,9 @@ public class RJsonLexerTest {
     @Test  
     public void testStartBrace(){  
         StringReader stream = new StringReader("{");
-        RCharStream jj_input_stream = new RCharStream(stream, 1, 1);
+        RJsonCharStream jj_input_stream = new RJsonCharStream(stream, 1, 1);
         RJsonLexer l = new RJsonLexer(jj_input_stream);
-        RToken t = l.getNextToken();
+        RJsonToken t = l.getNextToken();
         assertEquals(RJsonConstants.BRACE_OPEN,t.kind);
     } 
     @Test  

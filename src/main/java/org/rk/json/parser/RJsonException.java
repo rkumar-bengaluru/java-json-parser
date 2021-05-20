@@ -23,7 +23,7 @@ public class RJsonException extends Exception {
    * print the error message in the form:
    *     ParseException: <result of getMessage>
    */
-  public RJsonException(RToken currentTokenVal,
+  public RJsonException(RJsonToken currentTokenVal,
                         int[][] expectedTokenSequencesVal,
                         String[] tokenImageVal
                        )
@@ -68,7 +68,7 @@ public class RJsonException extends Exception {
    * this object has been created due to a parse error, the token
    * followng this token will (therefore) be the first error token.
    */
-  public RToken currentToken;
+  public RJsonToken currentToken;
 
   /**
    * Each entry in this array is an array of integers.  Each array
@@ -113,7 +113,7 @@ public class RJsonException extends Exception {
       expected.append(eol).append("    ");
     }
     String retval = "Encountered \"";
-    RToken tok = currentToken.next;
+    RJsonToken tok = currentToken.next;
     for (int i = 0; i < maxSize; i++) {
       if (i != 0) retval += " ";
       if (tok.kind == 0) {

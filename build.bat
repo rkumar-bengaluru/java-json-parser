@@ -1,13 +1,8 @@
 @ECHO OFF
 set CLASSPATH=.
-set CLASSPATH=%CLASSPATH%;bin;lib/*;
+set CLASSPATH=%CLASSPATH%;C:\\rupak\\2021\\java-json-parser\\build\\classes\\java\\main;lib/*;.;
 
+echo %CLASSPATH%s
 
-javac -d bin src/org/rk/json/pojo/*.java
-javac -d bin src/org/rk/json/parser/*.java
-javac -d bin test/org/rk/json/parser/*.java
-
-javac -d bin ref/*.java
-
-java org.rk.json.parser.Test
+java -Dlog4j2.configurationFile=C:\\rupak\\2021\\java-json-parser\\log4j2.xml org.rk.json.parser.RJsonLexerMain
 

@@ -1,8 +1,24 @@
+
 plugins {
-    id 'java-library'
+    id "application"
+}
+apply plugin : "java" 
+apply plugin : "java-library" 
+description = "Java Json Parser"
+
+
+
+ext {
+   javaMainClass = "org.rk.json.parser.RJsonLexerMain"
+}
+application {
+    mainClassName = javaMainClass
+    applicationDefaultJvmArgs = ['-Dlog4j2.configurationFile=C:\\rupak\\2021\\java-json-parser\\log4j2.xml']
 }
 
-description = "Java Json Parser"
+task myRun(type: JavaExec) {
+    println args
+}
 //mainClassName = 'org.rk.json.parser.RJsonLexerMain'
 
 test {
@@ -29,10 +45,11 @@ targetCompatibility = 1.8
 
 dependencies {
     testImplementation "junit:junit:4.12"
-    implementation files('lib/json-simple-1.1.1.jar')
+    implementation files('lib/json-simple-1.1.1.jar','log4j2.xml')
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
-implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
     
+    println configurations.runtimeClasspath.getAsPath()
 }
 // end::dependencies[]
 

@@ -24,7 +24,7 @@ package org.rk.json.parser;
  * contain only ASCII characters (with java-like unicode escape processing).
  */
 
-public class RCharStream
+public class RJsonCharStream
 {
 /** Whether parser is static. */
   public static final boolean staticFlag = false;
@@ -190,7 +190,7 @@ public class RCharStream
   }
 
 /** @return starting character for token. */
-  public char BeginToken() throws java.io.IOException
+  public char beginToken() throws java.io.IOException
   {     
      if (inBuf > 0)
      {
@@ -409,7 +409,7 @@ public class RCharStream
   }
 
 /** Constructor. */
-  public RCharStream(java.io.Reader dstream,
+  public RJsonCharStream(java.io.Reader dstream,
                  int startline, int startcolumn, int buffersize)
   {
     inputStream = dstream;
@@ -424,14 +424,14 @@ public class RCharStream
   }
 
 /** Constructor. */
-  public RCharStream(java.io.Reader dstream,
+  public RJsonCharStream(java.io.Reader dstream,
                                         int startline, int startcolumn)
   {
      this(dstream, startline, startcolumn, 4096);
   }
 
 /** Constructor. */
-  public RCharStream(java.io.Reader dstream)
+  public RJsonCharStream(java.io.Reader dstream)
   {
      this(dstream, 1, 1, 4096);
   }
@@ -469,41 +469,41 @@ public class RCharStream
      ReInit(dstream, 1, 1, 4096);
   }
 /** Constructor. */
-  public RCharStream(java.io.InputStream dstream, String encoding, int startline,
+  public RJsonCharStream(java.io.InputStream dstream, String encoding, int startline,
   int startcolumn, int buffersize) throws java.io.UnsupportedEncodingException
   {
      this(encoding == null ? new java.io.InputStreamReader(dstream) : new java.io.InputStreamReader(dstream, encoding), startline, startcolumn, buffersize);
   }
 
 /** Constructor. */
-  public RCharStream(java.io.InputStream dstream, int startline,
+  public RJsonCharStream(java.io.InputStream dstream, int startline,
   int startcolumn, int buffersize)
   {
      this(new java.io.InputStreamReader(dstream), startline, startcolumn, 4096);
   }
 
 /** Constructor. */
-  public RCharStream(java.io.InputStream dstream, String encoding, int startline,
+  public RJsonCharStream(java.io.InputStream dstream, String encoding, int startline,
                         int startcolumn) throws java.io.UnsupportedEncodingException
   {
      this(dstream, encoding, startline, startcolumn, 4096);
   }
 
 /** Constructor. */
-  public RCharStream(java.io.InputStream dstream, int startline,
+  public RJsonCharStream(java.io.InputStream dstream, int startline,
                         int startcolumn)
   {
      this(dstream, startline, startcolumn, 4096);
   }
 
 /** Constructor. */
-  public RCharStream(java.io.InputStream dstream, String encoding) throws java.io.UnsupportedEncodingException
+  public RJsonCharStream(java.io.InputStream dstream, String encoding) throws java.io.UnsupportedEncodingException
   {
      this(dstream, encoding, 1, 1, 4096);
   }
 
 /** Constructor. */
-  public RCharStream(java.io.InputStream dstream)
+  public RJsonCharStream(java.io.InputStream dstream)
   {
      this(dstream, 1, 1, 4096);
   }

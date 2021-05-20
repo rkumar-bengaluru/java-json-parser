@@ -1,7 +1,7 @@
 
 package org.rk.json.parser;
 /** Token Manager Error. */
-public class RTokenMgrError extends Error
+public class RJsonTokenMgrError extends Error
 {
 
    /*
@@ -121,17 +121,17 @@ public class RTokenMgrError extends Error
     */
 
    /** No arg constructor. */
-   public RTokenMgrError() {
+   public RJsonTokenMgrError() {
    }
 
    /** Constructor with message and reason. */
-   public RTokenMgrError(String message, int reason) {
+   public RJsonTokenMgrError(String message, int reason) {
       super(message);
       errorCode = reason;
    }
 
    /** Full Constructor. */
-   public RTokenMgrError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar, int reason) {
+   public RJsonTokenMgrError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar, int reason) {
       this(LexicalError(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
    }
 }

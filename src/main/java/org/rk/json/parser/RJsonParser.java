@@ -319,7 +319,7 @@ public class RJsonParser implements RJsonConstants {
   }
 
   final public JsonNumber number() throws RJsonException {
-    RToken t;
+    RJsonToken t;
     switch (jj_nt.kind) {
     case NUMBER_DECIMAL:
       t = jj_consume_token(NUMBER_DECIMAL);
@@ -411,11 +411,11 @@ public class RJsonParser implements RJsonConstants {
 
   /** Generated Token Manager. */
   public RJsonLexer token_source;
-  RCharStream jj_input_stream;
+  RJsonCharStream jj_input_stream;
   /** Current token. */
-  public RToken token;
+  public RJsonToken token;
   /** Next token. */
-  public RToken jj_nt;
+  public RJsonToken jj_nt;
   private int jj_gen;
   final private int[] jj_la1 = new int[13];
   static private int[] jj_la1_0;
@@ -431,10 +431,10 @@ public class RJsonParser implements RJsonConstants {
 
   /** Constructor. */
   public RJsonParser(java.io.Reader stream) {
-    jj_input_stream = new RCharStream(stream, 1, 1);
+    jj_input_stream = new RJsonCharStream(stream, 1, 1);
     token_source = new RJsonLexer(jj_input_stream);
     
-    token = new RToken();
+    token = new RJsonToken();
     token.next = jj_nt = token_source.getNextToken();
     jj_gen = 0;
     for (int i = 0; i < 13; i++) jj_la1[i] = -1;
@@ -445,7 +445,7 @@ public class RJsonParser implements RJsonConstants {
   /** Constructor with generated Token Manager. */
   public RJsonParser(RJsonLexer tm) {
     token_source = tm;
-    token = new RToken();
+    token = new RJsonToken();
     token.next = jj_nt = token_source.getNextToken();
     jj_gen = 0;
     for (int i = 0; i < 13; i++) jj_la1[i] = -1;
@@ -454,14 +454,14 @@ public class RJsonParser implements RJsonConstants {
   /** Reinitialise. */
   public void ReInit(RJsonLexer tm) {
     token_source = tm;
-    token = new RToken();
+    token = new RJsonToken();
     token.next = jj_nt = token_source.getNextToken();
     jj_gen = 0;
     for (int i = 0; i < 13; i++) jj_la1[i] = -1;
   }
 
-  private RToken jj_consume_token(int kind) throws RJsonException {
-    RToken oldToken = token;
+  private RJsonToken jj_consume_token(int kind) throws RJsonException {
+    RJsonToken oldToken = token;
     if ((token = jj_nt).next != null) jj_nt = jj_nt.next;
     else jj_nt = jj_nt.next = token_source.getNextToken();
     //RLogger.debug(RJsonParser.class,"jj_consume_token",token.kind + "," + kind);
@@ -477,7 +477,7 @@ public class RJsonParser implements RJsonConstants {
 
 
 /** Get the next Token. */
-  final public RToken getNextToken() {
+  final public RJsonToken getNextToken() {
     if ((token = jj_nt).next != null) jj_nt = jj_nt.next;
     else jj_nt = jj_nt.next = token_source.getNextToken();
     jj_gen++;
@@ -485,8 +485,8 @@ public class RJsonParser implements RJsonConstants {
   }
 
 /** Get the specific Token. */
-  final public RToken getToken(int index) {
-    RToken t = token;
+  final public RJsonToken getToken(int index) {
+    RJsonToken t = token;
     for (int i = 0; i < index; i++) {
       if (t.next != null) t = t.next;
       else t = t.next = token_source.getNextToken();
