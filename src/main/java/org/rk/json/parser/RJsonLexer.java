@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
 public class RJsonLexer extends NumberLexer implements RJsonConstants {
-    static Logger logger = LogManager.getLogger();
+    static Logger logger = LogManager.getLogger(RJsonLexer.class);
     public RJsonLexer(RJsonCharStream input) {
         super(input);
     }
@@ -28,14 +28,20 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
             matchedPos = 0;
             curPos = analyzeCurrentCharacter();
             //System.out.println( "matchedKind()" + "matchedKind" + matchedKind );
-            //logger.debug( "matchedKind()" + "matchedKind" + matchedKind );
+            logger.debug( "matchedKind()" + "matchedKind" + matchedKind );
             if (matchedKind != 0x7fffffff) {
                  if (matchedPos + 1 < curPos) {
                      input_stream.backup(curPos - matchedPos - 1); // possible backtracking.
                  }
+                 logger.debug( "curPos=" + curPos );
+                 if( (matchedKind == RJsonConstants.C_SINGLE_COMMENT) || (matchedKind == RJsonConstants.C_MULTILINE_COMMENT)) {
+                     matchedToken = fillToken();
+                     logger.debug("getNextToken()::Matched" + matchedToken.toString());
+                     return matchedToken;
+                 }
                  if ((toToken[matchedKind >> 6] & (1L << (matchedKind & 077))) != 0L) {
                      matchedToken = fillToken();
-                     //RLogger.getLogger(RJsonLexer.class).info("getNextToken()::Matched" + matchedToken.toString());
+                     logger.debug("getNextToken()::Matched" + matchedToken.toString());
                      return matchedToken;
                  } else {
                      continue EOFLoop;
@@ -108,6 +114,10 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
             case 84: // 'T'
             case 116: // 't'
                 return moveChar01(0x20000L);
+            case 47: // '/'
+                return moveChar01(0x60000L);
+            case 35: // '#'
+                return moveChar(0,'\n');
             default:
                 return findNumber(0,0);
         }

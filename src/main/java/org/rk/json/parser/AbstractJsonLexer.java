@@ -88,6 +88,51 @@ public class AbstractJsonLexer {
         
     }
 
+    protected int moveChar(int curPos,char target) {
+        int kind = 0x7fffffff;
+        try { 
+             curChar = input_stream.readChar(); 
+        } catch(java.io.IOException e) {
+            return 1;
+        }
+
+        for(;;) {
+            
+            if (curChar == '\n' || curChar == '\r' || curChar == '\f') {
+                kind = RJsonConstants.C_SINGLE_COMMENT;
+            }
+
+            if(curChar == 42) {
+                // lookahead for char '/'
+                try { 
+                    curChar = input_stream.readChar(); 
+                } catch(java.io.IOException e) {
+                    return 1;
+                }
+                        
+                if(curChar == 47) {
+                    ++curPos;
+                    kind = RJsonConstants.C_MULTILINE_COMMENT;
+                } else {
+                    input_stream.backup(1);
+                }
+            }
+            
+            ++curPos;
+            if (kind != 0x7fffffff) {
+                matchedKind = kind;
+                matchedPos = curPos;
+                return curPos;
+            }
+
+            try {
+                curChar = input_stream.readChar();
+            } catch (java.io.IOException e) {
+                return curPos;
+            }
+        }
+    }
+
     protected int moveChar01(long active0) {
         try { 
              curChar = input_stream.readChar(); 
@@ -118,6 +163,14 @@ public class AbstractJsonLexer {
             case 117: // 'u'
                 if ((active0 & 0x80000L) != 0L)
                     return moveChar02(active0, 0x80000L);
+                break;
+            case 47: // '/' - C_SINGLE_COMMENT
+                if ((active0 & 0x60000L) != 0L)
+                    return moveChar(0,'\n');
+                break;
+            case 42: // '*' - C_MULTILINE_COMMENT
+                if ((active0 & 0x60000L) != 0L)
+                    return moveChar(0,'*');
                 break;
             default:
                 break;
