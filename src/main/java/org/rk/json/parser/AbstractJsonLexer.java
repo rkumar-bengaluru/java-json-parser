@@ -41,7 +41,7 @@ public class AbstractJsonLexer {
         final int beginColumn;
         final int endColumn;
         String im = strLiteralImages[matchedKind];
-        tokenImage = (im == null) ? input_stream.GetImage() : im;
+        tokenImage = (im == null) ? input_stream.getImage() : im;
         beginLine = input_stream.getBeginLine();
         beginColumn = input_stream.getBeginColumn();
         endLine = input_stream.getEndLine();

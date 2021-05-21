@@ -13,6 +13,7 @@ import java.io.Reader;
  */
 
 public class RJsonCharStream {
+    static Logger logger = LogManager.getLogger(RJsonCharStream.class);
 
     protected int maxNextCharInd = 0;
     protected int nextCharInd = -1;
@@ -36,7 +37,7 @@ public class RJsonCharStream {
     protected char[] buffer;
     protected Reader inputStream;
 
-    private char returnFirstCharInBuffer() {
+    private char readFromBuffer() {
         --inBuf;
         if (++bufpos == bufsize)
             bufpos = 0;
@@ -46,7 +47,8 @@ public class RJsonCharStream {
     public char beginToken() throws IOException {
 
         if (inBuf > 0) {
-            return returnFirstCharInBuffer();
+            // lookahead and backup has happened.
+            return readFromBuffer();
         }
 
         tokenBegin = 0;
@@ -56,6 +58,7 @@ public class RJsonCharStream {
 
     public char readChar() throws IOException {
         if (inBuf > 0) {
+            // lookahead and backup has happened.
             return returnFirstCharInBuffer();
         }
 
@@ -78,9 +81,9 @@ public class RJsonCharStream {
         return nextCharBuf[nextCharInd];
     }  
 
-    public String GetImage() {
+    public String getImage() {
         String response = null;
-        
+
         if (bufpos >= tokenBegin)
             response = new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
         else 

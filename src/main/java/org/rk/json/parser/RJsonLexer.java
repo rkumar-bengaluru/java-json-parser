@@ -57,7 +57,7 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
                 input_stream.backup(1); 
             } catch (java.io.IOException e1) { 
                 EOFSeen = true;
-                error_after = curPos <= 1 ? "" : input_stream.GetImage();
+                error_after = curPos <= 1 ? "" : input_stream.getImage();
                 if (curChar == '\n' || curChar == '\r') {
                     error_line++;
                     error_column = 0;
@@ -68,7 +68,7 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
 
             if (!EOFSeen) {
                 input_stream.backup(1);
-                error_after = curPos <= 1 ? "" : input_stream.GetImage();
+                error_after = curPos <= 1 ? "" : input_stream.getImage();
             }
 
             throw new RJsonTokenMgrError(EOFSeen, curLexState, error_line, error_column, error_after, curChar, RJsonTokenMgrError.LEXICAL_ERROR);
