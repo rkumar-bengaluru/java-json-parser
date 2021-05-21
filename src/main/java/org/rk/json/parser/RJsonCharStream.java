@@ -59,7 +59,7 @@ public class RJsonCharStream {
     public char readChar() throws IOException {
         if (inBuf > 0) {
             // lookahead and backup has happened.
-            return returnFirstCharInBuffer();
+            return readFromBuffer();
         }
 
         char c;

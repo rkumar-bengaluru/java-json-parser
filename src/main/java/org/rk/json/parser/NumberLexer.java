@@ -6,13 +6,7 @@ import org.apache.logging.log4j.LogManager;
 public class NumberLexer extends AbstractJsonLexer {
     static Logger logger = LogManager.getLogger(NumberLexer.class);
     int curLexState = 0;
-    int defaultLexState = 0;
-    int jjnewStateCnt;
-    int jjround;
-
-    private final int[] jjrounds = new int[1];
-    private final int[] jjstateSet = new int[2];
-
+   
     public NumberLexer(RJsonCharStream input) {
         super(input);
     }
