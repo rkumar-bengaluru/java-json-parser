@@ -1,4 +1,8 @@
 # java-json-parser
+This parser is primaryly written to generate formated Json and Html file from Json. Please see
+the demo link below to make sure this is what you are looking for.
+
+`<Demo>` : <https://rkumar-bengaluru.github.io/java-json-parser/>
 ## Formatted JSON Html File Generator
 A fast and minimal JSON parser and writer for Java. It's not an object mapper, but a bare-bones library that aims at being
 * **minimal**: no dependencies, single package with just a few classes, small download size 
