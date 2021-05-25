@@ -16,7 +16,7 @@ public class JsonNull extends JsonObject {
         destination.append("null");
     }
 
-    public void toHtml(Appendable destination) throws IOException {
+    public void toHtml(Appendable destination,int currentLevel) throws IOException {
         destination.append("<span class=\"null\">");
         destination.append("null");
         destination.append("</span>");

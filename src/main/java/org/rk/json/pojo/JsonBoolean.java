@@ -19,10 +19,10 @@ public class JsonBoolean extends JsonObject {
         destination.append(value.toString());
     }
     @Override
-    public void toHtml(Appendable destination) throws IOException {
-        destination.append("<span class=\"boolean\">");
+    public void toHtml(Appendable destination,int currentLevel) throws IOException {
+        destination.append("<span class=\"type-boolean\">\"");
         destination.append(value.toString());
-        destination.append("</span>");
+        destination.append("\"</span>");
     }
 
 }

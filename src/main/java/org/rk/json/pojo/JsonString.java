@@ -21,12 +21,15 @@ public class JsonString extends JsonObject {
         destination.append("\"");
     }
     @Override
-    public void toHtml(Appendable destination) throws IOException {
-        destination.append("<span class=\"string\">");
-        destination.append("\"");
+    public void toHtml(Appendable destination,int currentLevel) throws IOException {
+        if(isKey) {
+            destination.append("<span class=\"type-key\">\"");
+        }else  {
+            destination.append("<span class=\"type-string\">\"");
+        }
+        
         destination.append(value);
-        destination.append("\"");
-        destination.append("</span>");
+        destination.append("\"</span>");
     }
 
 }

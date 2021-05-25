@@ -19,8 +19,8 @@ public class JsonNumber extends JsonObject {
         destination.append(value);
     }
     @Override
-    public void toHtml(Appendable destination) throws IOException {
-        destination.append("<span class=\"integer\">");
+    public void toHtml(Appendable destination,int currentLevel) throws IOException {
+        destination.append("<span class=\"type-number\">");
         destination.append(value);
         destination.append("</span>");
     }

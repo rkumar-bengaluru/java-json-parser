@@ -78,6 +78,7 @@ public class RJsonParser implements RJsonConstants {
     public JsonObject parse() throws RJsonException {
       //RLogger.getLogger(RJsonParser.class).info("parse()" + "");
         JsonObject toReturn = anything();
+        toReturn.setRoot();
         if (!ensureEOF()) {
             throw new IllegalStateException("parser.expectedEOF");
         }
@@ -179,7 +180,7 @@ public class RJsonParser implements RJsonConstants {
       jj_consume_token(-1);
       throw new RJsonException();
     }
-      {if (true) return key;}
+      {if (true) {key.setKey();return key;}}
     throw new Error("Missing return statement in function");
   }
 
