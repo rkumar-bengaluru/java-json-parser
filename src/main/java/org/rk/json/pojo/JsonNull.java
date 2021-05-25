@@ -12,7 +12,7 @@ public class JsonNull extends JsonObject {
         
     }
 
-    public void toString(Appendable destination) throws IOException {
+    public void toString(Appendable destination,int currentLevel) throws IOException {
         destination.append("null");
     }
 

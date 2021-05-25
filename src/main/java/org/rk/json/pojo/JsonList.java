@@ -25,18 +25,25 @@ public class JsonList extends JsonObject {
 	}
 
     @Override
-    public void toString(Appendable destination) throws IOException {
-		destination.append("[");
+    public void toString(Appendable destination,int currentLevel) throws IOException {
+		
+        ++currentLevel;
+        StringBuilder tabs = new StringBuilder();
+        for(int i = 0; i < currentLevel;i++)
+                tabs.append("\t");
+        destination.append("\n" + tabs.toString() + "[\n");
+        
+        int j = 0;
+        int size = data.size();
 		
 		String sep = "";
 		for (JsonObject i : data) {
-			destination.append(sep);
-			i.toString(destination);
-			
+			i.toString(destination,currentLevel);
+			if(j != (size-1))
+                destination.append(",");
 			sep = ",";
 		}
-		
-		destination.append("]");
+		destination.append("\n" + tabs.toString() + "]");
 	}
 
     @Override
@@ -69,7 +76,9 @@ public class JsonList extends JsonObject {
 		destination.append("<span class=\"type-symbol\">]</span>");
 		if(root) {
             destination.append("</div>");
-            replaceAndWrite("result.html",destination.toString());
+			StringBuilder formatString = new StringBuilder();
+            toString(formatString,currentLevel);
+            replaceAndWrite("result.html",destination.toString(),formatString.toString());
         }
 
     }

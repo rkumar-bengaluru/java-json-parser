@@ -15,7 +15,7 @@ public class JsonInteger extends JsonObject {
         this.value = value;
     }
     @Override
-    public void toString(Appendable destination) throws IOException {
+    public void toString(Appendable destination,int currentLevel) throws IOException {
         destination.append(value.toString());
     }
     @Override

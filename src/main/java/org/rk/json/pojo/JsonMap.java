@@ -27,20 +27,28 @@ public class JsonMap extends JsonObject {
     }
 
     @Override
-    public void toString(Appendable destination) throws IOException {
-		destination.append("{");
-		
+    public void toString(Appendable destination,int currentLevel) throws IOException {
+        
 		String sep = "";
+        ++currentLevel;
+        StringBuilder tabs = new StringBuilder();
+        for(int i = 0; i < currentLevel;i++)
+                tabs.append("\t");
+        destination.append("\n" + tabs.toString() + "{\n");
+        
+        int j = 0;
+        int size = data.size();
 		for (Map.Entry<JsonObject, JsonObject> i : data.entrySet()) {
-			destination.append(sep);
-            i.getKey().toString(destination);
-            destination.append(":");
-			i.getValue().toString(destination);
 			
-			sep = ",";
+            i.getKey().toString(destination,currentLevel);
+            destination.append(" : ");
+			i.getValue().toString(destination,currentLevel);
+			if(j != (size-1))
+                destination.append(",\n");
+            j++;
+			
 		}
-		
-		destination.append("}");
+		destination.append("\n" + tabs.toString() + "}");
 	}
 
     @Override
@@ -75,8 +83,10 @@ public class JsonMap extends JsonObject {
 		destination.append("<span class=\"type-symbol\">}</span>");
 
         if(root) {
-            destination.append("</div>");
-            replaceAndWrite("result.html",destination.toString());
+            destination.append("</code></div>");
+            StringBuilder formatString = new StringBuilder();
+            toString(formatString,currentLevel);
+            replaceAndWrite("result.html",destination.toString(),formatString.toString());
         }
     }
 

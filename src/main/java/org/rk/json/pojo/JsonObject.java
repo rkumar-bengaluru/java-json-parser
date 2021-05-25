@@ -13,6 +13,7 @@ public abstract class JsonObject {
     private JsonObjType type;
     protected boolean root = false;
     protected boolean isKey = false;
+    protected String input = "";
 
     public JsonObject(JsonObjType type) {
         this.type = type;
@@ -30,16 +31,28 @@ public abstract class JsonObject {
         this.isKey = true;
     }
 
-    protected void replaceAndWrite(String fileName,String replaceContent) throws IOException{
+    public void setInput(String in) {
+        this.input = in;
+    }
+
+    protected void replaceAndWrite(String fileName,String replaceContent,String formattedString) throws IOException{
         Path path = Paths.get("conf/temp.html");
         Stream <String> lines = Files.lines(path);
         List <String> replaced = lines.map(line -> line.replaceAll("%JSONCONTENT%", replaceContent)).collect(Collectors.toList());
         Files.write(Paths.get(fileName), replaced);
+        path = Paths.get(fileName);
+        lines = Files.lines(path);
+        replaced = lines.map(line -> line.replaceAll("%INPUT%", formattedString)).collect(Collectors.toList());
+        Files.write(Paths.get(fileName), replaced);
+        // path = Paths.get(fileName);
+        // lines = Files.lines(path);
+        // replaced = lines.map(line -> line.replaceAll("%INPUT%", input)).collect(Collectors.toList());
+        // Files.write(Paths.get(fileName), replaced);
     }
 
     /**
      */
-    abstract public void toString(Appendable destination) throws IOException ;
+    abstract public void toString(Appendable destination,int currentLevel) throws IOException ;
     /**
      */
     abstract public void toHtml(Appendable destination,int level) throws IOException ;

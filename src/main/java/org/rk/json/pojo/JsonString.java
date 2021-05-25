@@ -15,10 +15,20 @@ public class JsonString extends JsonObject {
         this.value = value;
     }
     @Override
-    public void toString(Appendable destination) throws IOException {
-        destination.append("\"");
-        destination.append(value);
-        destination.append("\"");
+    public void toString(Appendable destination,int currentLevel) throws IOException {
+        StringBuilder tabs = new StringBuilder();
+        for(int i = 0; i <= currentLevel;i++)
+            tabs.append("\t");
+        if(isKey) {
+            destination.append(tabs.toString() + "\"");
+            destination.append(value);
+            destination.append("\"");
+        }else  {
+            destination.append("\"");
+            destination.append(value);
+            destination.append("\"");
+        }
+        
     }
     @Override
     public void toHtml(Appendable destination,int currentLevel) throws IOException {

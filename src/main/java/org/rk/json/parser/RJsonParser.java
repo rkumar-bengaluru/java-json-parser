@@ -24,9 +24,11 @@ public class RJsonParser implements RJsonConstants {
         jj_la1_0 = new int[] {0xccf8480,0x78000,0x1ccf8000,0x40,0x1ccf8000,0x40,0xccf8480,0xccf8000,0x60000,0x18000,0xcc00000,0x8800000,0x4400000,};
     }
 
+    private String input = null;
     /** Constructor. */
     public RJsonParser(String input) {
         this(new java.io.StringReader(input));
+        this.input = input;
     }
 
     /** Constructor. */
@@ -79,6 +81,7 @@ public class RJsonParser implements RJsonConstants {
       //RLogger.getLogger(RJsonParser.class).info("parse()" + "");
         JsonObject toReturn = anything();
         toReturn.setRoot();
+        toReturn.setInput(input);
         if (!ensureEOF()) {
             throw new IllegalStateException("parser.expectedEOF");
         }
