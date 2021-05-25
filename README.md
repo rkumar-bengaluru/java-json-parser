@@ -25,7 +25,7 @@ instance.parse().toHtml(builder,-1);
 ```
 Build
 -----
-To build java-json-json on your machine, checkout the repository, `cd` into it, and call:
+To build java-json-parser on your machine, checkout the repository, `cd` into it, and call:
 ```
 gradlew build
 ```
