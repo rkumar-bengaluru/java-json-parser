@@ -54,6 +54,11 @@ public abstract class JsonObject {
      */
     abstract public void toString(Appendable destination,int currentLevel) throws IOException ;
     /**
+     * Generates an html file with the file name result.html in the current working dir.
+     * 
+     * @destination where the string buffer is stored.
+     * @currentLeve default is -1
      */
-    abstract public void toHtml(Appendable destination,int level) throws IOException ;
+    abstract public void toHtml(Appendable destination,int currentLevel) throws IOException ;
+   
 }

@@ -27,6 +27,10 @@ RJsonParser instance = new RJsonParser(json);
 StringBuilder builder = new StringBuilder();
 instance.parse().toHtml(builder,-1);
 ```
+The above generates the html file in the current working directory with the file name 'result.html'.
+Left side is input json file and the right side shows formatted json output. Below is an example output.
+![](https://pandao.github.io/editor.md/examples/images/4.jpg)
+
 Build
 -----
 To build java-json-parser on your machine, checkout the repository, `cd` into it, and call:

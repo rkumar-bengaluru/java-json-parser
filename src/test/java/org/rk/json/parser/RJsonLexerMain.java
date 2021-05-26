@@ -24,7 +24,7 @@ public class RJsonLexerMain {
             String json = " {\"name\"   :\"son oo\"   ,\"male\":null,\"age\":{\"age\":22,\"gh\":\"abcd\"}} ";
             RJsonParser instance = new RJsonParser(json);
             StringBuilder builder = new StringBuilder();
-            instance.parse().toString(builder);
+            instance.parse().toString(builder,-1);
             System.out.println(builder.toString());
         }catch(Exception e) {
             e.printStackTrace();
