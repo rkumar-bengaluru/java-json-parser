@@ -316,7 +316,18 @@ public class RJsonCharStream {
         }
         throw new IOException(); // Should never come here
     }
-
+    /** Constructor. */
+    public RJsonCharStream(java.io.InputStream dstream, String encoding, int startline,
+    int startcolumn, int buffersize) throws java.io.UnsupportedEncodingException
+    {
+        this(encoding == null ? new java.io.InputStreamReader(dstream) : new java.io.InputStreamReader(dstream, encoding), startline, startcolumn, buffersize);
+    }    
+    /** Constructor. */
+    public RJsonCharStream(java.io.InputStream dstream, String encoding, int startline,
+                            int startcolumn) throws java.io.UnsupportedEncodingException
+    {
+        this(dstream, encoding, startline, startcolumn, 4096);
+    }
     public RJsonCharStream(InputStream dstream, int startline,int startcolumn) {
         this(dstream, startline, startcolumn, 4096);
     }

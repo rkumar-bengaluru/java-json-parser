@@ -50,7 +50,19 @@ public class RJsonParser implements RJsonConstants {
         jj_gen = 0;
         for (int i = 0; i < 13; i++) jj_la1[i] = -1;
     }
-
+    /** Constructor with InputStream. */
+      public RJsonParser(java.io.InputStream stream) {
+        this(stream, null);
+      }
+      /** Constructor with InputStream and supplied encoding */
+      public RJsonParser(java.io.InputStream stream, String encoding) {
+        try { jj_input_stream = new RJsonCharStream(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
+        token_source = new RJsonLexer(jj_input_stream);
+        token = new RJsonToken();
+        token.next = jj_nt = token_source.getNextToken();
+        jj_gen = 0;
+        for (int i = 0; i < 13; i++) jj_la1[i] = -1;
+      }
 
     /**
      * Parses a JSON object into a Java {@code Map}.
