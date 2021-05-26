@@ -74,7 +74,12 @@ public class RJsonCharStream {
         }
     }
 
+    public void spaceDetected() {
+        tokenBegin++;
+    }
+
     protected char readByte() throws IOException {
+        logger.debug("nextCharInd=" + (nextCharInd+1) + ",nextChar=" + nextCharBuf[nextCharInd+1]);
         if (++nextCharInd >= maxNextCharInd)
             fillBuff();
 
@@ -83,12 +88,12 @@ public class RJsonCharStream {
 
     public String getImage() {
         String response = null;
-
+        logger.debug("bufpos=" + bufpos + ",tokenBegin="+ tokenBegin);
         if (bufpos >= tokenBegin)
             response = new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
         else 
             response = new String(buffer, tokenBegin, bufsize - tokenBegin) + new String(buffer, 0, bufpos + 1);
-        
+        logger.debug("response=" + response + ",charAt(0)=" + (int)response.charAt(0));
         return response;
     }  
 
@@ -134,14 +139,23 @@ public class RJsonCharStream {
 
         switch (c) {
             case '\r' :
+                logger.debug("---------------------cr");
+                tokenBegin++;
                 prevCharIsCR = true;
                 break;
             case '\n' :
+                logger.debug("---------------------cl");
+                tokenBegin++;
                 prevCharIsLF = true;
                 break;
             case '\t' :
+                logger.debug("---------------------ct");
+                tokenBegin++;
                 column--;
                 column += (tabSize - (column % tabSize));
+                break;
+            case 32:
+                logger.debug("space detected...");
                 break;
             default :
                 break;

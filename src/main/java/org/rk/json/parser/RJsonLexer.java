@@ -85,7 +85,7 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
             } catch(java.io.IOException e) {
                 return 1;
             }
-            analyzeCurrentCharacter();
+            return analyzeCurrentCharacter();
         }
 
         switch(curChar) {
@@ -127,6 +127,8 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
         assert curChar != -1;
         char res = (char) curChar;
         if (curChar == '\n') {
+        } else if(curChar == ' ') {
+            input_stream.spaceDetected();
         }
     }
 

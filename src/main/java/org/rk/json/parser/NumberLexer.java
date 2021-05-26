@@ -36,14 +36,14 @@ public class NumberLexer extends AbstractJsonLexer {
         }
         logger.debug("\"" + curChar + "\"");
         // only expected curChar is ',' || '}'
-        if(curChar == 44 || curChar == 125) {
+        if(curChar == 44 || curChar == 125 || curChar == '\r' || curChar == '\n' || curChar == ' ' || curChar == '\t')  {
             --curPos;
             logger.debug("\"" + curChar + "\"");
             matchedKind = RJsonConstants.NUMBER_INTEGER;
             matchedPos = curPos;
             input_stream.backup(1);
             return curPos;
-        }
+        } 
 
         // not a valid numbers
         return curPos;

@@ -1,7 +1,10 @@
 package org.rk.json.parser;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class AbstractJsonLexer {
+    static Logger logger = LogManager.getLogger(AbstractJsonLexer.class);
     private static final String[] strLiteralImages = {
         "", null, null, null, null, null, "\54", "\173", "\175", "\72", "\133", 
         "\135", null, null, null, null, null, null, null, null, null, null, "\47\47", 
@@ -55,6 +58,7 @@ public class AbstractJsonLexer {
     }
 
     protected int findStringLiteral(int curPos, long active0) {
+        logger.debug("finding string literal");
         int kind = 0x7fffffff;
         try { 
              curChar = input_stream.readChar(); 
@@ -63,18 +67,21 @@ public class AbstractJsonLexer {
         }
         
         for (;;) {
-            //RLogger.debug(AbstractLexer.class,"findStringLiteral()",curChar);
+            logger.debug("findStringLiteral() = " + (int)curChar);
             switch(curChar) {
                 case 34: // '"'
+                    logger.debug("findStringLiteral() = " + (int)curChar);
                     kind = RJsonConstants.STRING_DOUBLE_NONEMPTY;
                     break;
                 default:
                     break;
             }
             ++curPos;
+            
             if (kind != 0x7fffffff) {
                 matchedKind = kind;
                 matchedPos = curPos;
+                logger.debug("returning string literal () = " + curPos);
                 return curPos;
             }
             
@@ -139,7 +146,7 @@ public class AbstractJsonLexer {
         } catch(java.io.IOException e) {
             return 1;
         }
-        //RLogger.getLogger(AbstractJsonLexer.class).info("moveChar01::curChar=" + curChar);
+        logger.debug("moveChar01::curChar=" + curChar);
         switch(curChar) {
             case 34: // '"'
                 if ((active0 & 0x800000L) != 0L)
