@@ -33,8 +33,8 @@ public class RJsonLexerMain {
             String json = "{\"name\":\"sonoo\",\"salary\":600000.0,\"age\":27}";
             //String json = "{\"name\":\"sonoo\",\"age\":0.1}";
             // String json = " {\"name\"   :\"son oo\"   ,\"male\":null,\"age\":{\"age\":22,\"gh\":\"abcd\"} }";
-            //RJsonParser instance = new RJsonParser(json);
-            RJsonParser instance = new RJsonParser(new FileInputStream("./src/test/03.json"));
+            RJsonParser instance = new RJsonParser(json);
+            //RJsonParser instance = new RJsonParser(new FileInputStream("./src/test/03.json"));
             StringBuilder builder = new StringBuilder();
             instance.parse().toHtml(builder,-1);
             System.out.println(builder.toString());
