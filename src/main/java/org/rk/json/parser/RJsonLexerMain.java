@@ -19,6 +19,10 @@ import org.junit.BeforeClass;
 import org.junit.Test; 
 import java.io.*;
 
+import org.rk.json.pojo.JsonList;
+import org.rk.json.pojo.JsonString;
+import org.rk.json.pojo.JsonObjType;
+
 public class RJsonLexerMain {
     static Logger logger = LogManager.getLogger(RJsonLexerMain.class);
 
@@ -30,14 +34,21 @@ public class RJsonLexerMain {
             // 
             //System.out.println(a.toString());
             
-            String json = "{\"name\":\"sonoo\",\"salary\":600000.0,\"age\":27}";
+            //String json = "{\"name\":\"sonoo\",\"salary\":600000.0,\"age\":27}";
             //String json = "{\"name\":\"sonoo\",\"age\":0.1}";
             // String json = " {\"name\"   :\"son oo\"   ,\"male\":null,\"age\":{\"age\":22,\"gh\":\"abcd\"} }";
             //RJsonParser instance = new RJsonParser(json);
-            RJsonParser instance = new RJsonParser(new FileInputStream("./src/test/03.json"));
-            StringBuilder builder = new StringBuilder();
-            instance.parse().toHtml(builder,-1);
-            System.out.println(builder.toString());
+            // RJsonParser instance = new RJsonParser(new FileInputStream("./src/test/03.json"));
+            // StringBuilder builder = new StringBuilder();
+            // instance.parse().toHtml(builder,-1);
+            // System.out.println(builder.toString());
+
+            JsonList instance = new JsonList(JsonObjType.LIST);
+            instance.add(new JsonString(JsonObjType.STRING,"fivestar"));
+            instance.add(new JsonString(JsonObjType.STRING,"ratings"));
+            StringBuilder appendable = new StringBuilder();
+            instance.toString(appendable,-1);
+            logger.debug(appendable.toString());
         }catch(Exception e) {
             e.printStackTrace();
         }

@@ -42,6 +42,7 @@ public class JsonList extends JsonObject {
 			if(j != (size-1))
                 destination.append(",");
 			sep = ",";
+            j++;
 		}
 		destination.append("\n" + tabs.toString() + "]");
 	}

@@ -13,7 +13,7 @@ ext {
 }
 application {
     mainClassName = javaMainClass
-    applicationDefaultJvmArgs = ['-Dlog4j2.configurationFile=E:\\2021\\java-json-parser\\log4j2.xml']
+    applicationDefaultJvmArgs = ['-Dlog4j2.configurationFile=log4j2.xml']
 }
 
 task myRun(type: JavaExec) {
