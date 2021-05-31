@@ -6,6 +6,16 @@ public class JsonString extends JsonObject {
     
     private String value;
 
+    public JsonString(JsonObjType type,boolean isKey, String value) {
+        super(type);
+        if (value == null || type == null) {
+			throw new IllegalArgumentException("type || value is null.");
+		}
+        
+        this.value = value;
+        setKey(isKey);
+    }
+
     public JsonString(JsonObjType type, String value) {
         super(type);
         if (value == null || type == null) {

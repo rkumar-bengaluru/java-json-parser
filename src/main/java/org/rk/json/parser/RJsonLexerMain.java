@@ -37,7 +37,6 @@ public class RJsonLexerMain {
             //String json = "{\"name\":\"sonoo\",\"salary\":600000.0,\"age\":27}";
             //String json = "{\"name\":\"sonoo\",\"age\":0.1}";
             // String json = " {\"name\"   :\"son oo\"   ,\"male\":null,\"age\":{\"age\":22,\"gh\":\"abcd\"} }";
-<<<<<<< HEAD
             //RJsonParser instance = new RJsonParser(json);
             // RJsonParser instance = new RJsonParser(new FileInputStream("./src/test/03.json"));
             // StringBuilder builder = new StringBuilder();
@@ -50,13 +49,6 @@ public class RJsonLexerMain {
             StringBuilder appendable = new StringBuilder();
             instance.toString(appendable,-1);
             logger.debug(appendable.toString());
-=======
-            RJsonParser instance = new RJsonParser(json);
-            //RJsonParser instance = new RJsonParser(new FileInputStream("./src/test/03.json"));
-            StringBuilder builder = new StringBuilder();
-            instance.parse().toHtml(builder,-1);
-            System.out.println(builder.toString());
->>>>>>> aaf7f528661429d4c9cc49e6f39a5f542b5d6bb2
         }catch(Exception e) {
             e.printStackTrace();
         }

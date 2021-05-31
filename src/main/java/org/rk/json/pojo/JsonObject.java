@@ -31,6 +31,10 @@ public abstract class JsonObject {
         this.isKey = true;
     }
 
+    public void setKey(boolean newKey) {
+        this.isKey = newKey;
+    }
+
     public void setInput(String in) {
         this.input = in;
     }
