@@ -16,14 +16,17 @@ public class RJsonListTest {
     @Test  
     public void testList01(){  
         try {
+            String expected = "\n[\n\t\"fivesstar\",\n\t\"ratings\"\n]";
+            
             JsonList instance = new JsonList(JsonObjType.LIST);
             instance.setRoot();
             instance.add(new JsonString(JsonObjType.STRING,"fivesstar"));
             instance.add(new JsonString(JsonObjType.STRING,"ratings"));
             StringBuilder appendable = new StringBuilder();
             instance.toString(appendable,-1);
-            System.out.println("response = " + appendable.toString());
-            assertEquals("\n[\n\"fivesstar\",\"ratings\"\n]",appendable.toString());
+            System.out.println("actual = " + appendable.toString());
+            System.out.println("expected = " + expected);
+            assertEquals(expected,appendable.toString());
         } catch(Exception e) {
             fail(e.getMessage());
         }

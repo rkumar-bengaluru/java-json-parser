@@ -40,7 +40,7 @@ public class JsonList extends JsonObject {
 		for (JsonObject i : data) {
 			i.toString(destination,currentLevel);
 			if(j != (size-1))
-                destination.append(",");
+                destination.append(",\n");
 			sep = ",";
             j++;
 		}

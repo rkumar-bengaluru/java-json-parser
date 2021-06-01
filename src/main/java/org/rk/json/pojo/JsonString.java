@@ -16,6 +16,17 @@ public class JsonString extends JsonObject {
         setKey(isKey);
     }
 
+    public JsonString(JsonObjType type,boolean isKey, boolean isKeyValue, String value) {
+        super(type);
+        if (value == null || type == null) {
+			throw new IllegalArgumentException("type || value is null.");
+		}
+        
+        this.value = value;
+        setKey(isKey);
+        setKeyValue(isKeyValue);
+    }
+
     public JsonString(JsonObjType type, String value) {
         super(type);
         if (value == null || type == null) {
@@ -26,15 +37,21 @@ public class JsonString extends JsonObject {
     }
     @Override
     public void toString(Appendable destination,int currentLevel) throws IOException {
+        ++currentLevel;
+        
         StringBuilder tabs = new StringBuilder();
-        for(int i = 0; i <= currentLevel;i++)
+        for(int i = 0; i < currentLevel;i++)
             tabs.append("\t");
         if(isKey) {
             destination.append(tabs.toString() + "\"");
             destination.append(value);
             destination.append("\"");
-        }else  {
+        } else if (isKeyValue) {    
             destination.append("\"");
+            destination.append(value);
+            destination.append("\"");
+        } else  {
+            destination.append(tabs.toString() + "\"");
             destination.append(value);
             destination.append("\"");
         }

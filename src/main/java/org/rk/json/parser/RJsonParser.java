@@ -219,6 +219,7 @@ public class RJsonParser implements RJsonConstants {
       key = objectKey();
       jj_consume_token(COLON);
       value = anything();
+      value.setKeyValue(true);
           map.put(key, value);
           key = null; value = null;
       label_1:
@@ -235,6 +236,7 @@ public class RJsonParser implements RJsonConstants {
         key = objectKey();
         jj_consume_token(COLON);
         value = anything();
+        value.setKeyValue(true);
               map.put(key, value);
               key = null; value = null;
       }

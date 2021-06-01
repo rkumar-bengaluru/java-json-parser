@@ -25,16 +25,17 @@ public class RJsonMapTest {
 
             JsonMap instance = new JsonMap(JsonObjType.MAP);
             instance.setRoot();
-            instance.put(new JsonString(JsonObjType.STRING,true,"productId"),new JsonString(JsonObjType.STRING,"0ENJMZAXX2"));
-            instance.put(new JsonString(JsonObjType.STRING,true,"Title"),new JsonString(JsonObjType.STRING,"APACS Finapi 262 Unstrung Badminton Racquet"));
+            instance.put(new JsonString(JsonObjType.STRING,true,"productId"),new JsonString(JsonObjType.STRING,false,true,"0ENJMZAXX2"));
+            instance.put(new JsonString(JsonObjType.STRING,true,"Title"),new JsonString(JsonObjType.STRING,false,true,"APACS Finapi 262 Unstrung Badminton Racquet"));
             instance.put(listKey,list);
-            String expectedList = "\n\t[\n\"Material: High Modulus Graphite\",\"Power Frame Series\"\n\t]";
+            String expectedList = "\n\t[\n\t\t\"Material: High Modulus Graphite\",\n\t\t\"Power Frame Series\"\n\t]";
             String keyValues = "\n\t\"productId\" : \"0ENJMZAXX2\",\n\t\"Title\" : \"APACS Finapi 262 Unstrung Badminton Racquet\",\n\t";
             String expected = "\n{" + keyValues + "\"keyFeatures\"" + " : " + expectedList + "\n}"; 
     
             StringBuilder appendable = new StringBuilder();
             instance.toString(appendable,-1);
             System.out.println("response = " + appendable.toString());
+            System.out.println("expected = " + expected);
             assertEquals(expected,appendable.toString());
         } catch(Exception e) {
             fail(e.getMessage());
@@ -52,16 +53,17 @@ public class RJsonMapTest {
 
             JsonMap instance = new JsonMap(JsonObjType.MAP);
             instance.setRoot();
-            instance.put(new JsonString(JsonObjType.STRING,true,"productId"),new JsonString(JsonObjType.STRING,"0ENJMZAXX2"));
-            instance.put(new JsonString(JsonObjType.STRING,true,"Title"),new JsonString(JsonObjType.STRING,"APACS Finapi 262 Unstrung Badminton Racquet"));
+            instance.put(new JsonString(JsonObjType.STRING,true,"productId"),new JsonString(JsonObjType.STRING,false,true,"0ENJMZAXX2"));
+            instance.put(new JsonString(JsonObjType.STRING,true,"Title"),new JsonString(JsonObjType.STRING,false,true,"APACS Finapi 262 Unstrung Badminton Racquet"));
             instance.put(listKey,list);
-            String expectedList = "\n\t[\n\"Material: High Modulus Graphite\",\"Power Frame Series\"\n\t]";
+            String expectedList = "\n\t[\n\t\t\"Material: High Modulus Graphite\",\n\t\t\"Power Frame Series\"\n\t]";
             String keyValues = "\n\t\"productId\" : \"0ENJMZAXX2\",\n\t\"Title\" : \"APACS Finapi 262 Unstrung Badminton Racquet\",\n\t";
             String expected = "\n{" + keyValues + "\"keyFeatures\"" + " : " + expectedList + "\n}"; 
     
             StringBuilder appendable = new StringBuilder();
             instance.toString(appendable,-1);
-            System.out.println("response = " + appendable.toString());
+            System.out.println("actual = " + appendable.toString());
+            System.out.println("expected = " + expected);
             assertEquals(expected,appendable.toString());
         } catch(Exception e) {
             fail(e.getMessage());

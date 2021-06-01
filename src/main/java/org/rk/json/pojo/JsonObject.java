@@ -14,6 +14,7 @@ public abstract class JsonObject {
     protected boolean root = false;
     protected boolean isKey = false;
     protected String input = "";
+    protected boolean isKeyValue = false;
 
     public JsonObject(JsonObjType type) {
         this.type = type;
@@ -37,6 +38,11 @@ public abstract class JsonObject {
 
     public void setInput(String in) {
         this.input = in;
+    }
+
+    public void setKeyValue(boolean newKeyValue) {
+        this.isKeyValue = newKeyValue;
+        System.out.println("setting key value " + newKeyValue + ",for String -" + input);
     }
 
     protected void replaceAndWrite(String fileName,String replaceContent,String formattedString) throws IOException{

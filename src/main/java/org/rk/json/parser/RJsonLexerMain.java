@@ -22,6 +22,7 @@ import java.io.*;
 import org.rk.json.pojo.JsonList;
 import org.rk.json.pojo.JsonString;
 import org.rk.json.pojo.JsonObjType;
+import org.rk.json.pojo.JsonMap;
 
 public class RJsonLexerMain {
     static Logger logger = LogManager.getLogger(RJsonLexerMain.class);
@@ -43,12 +44,25 @@ public class RJsonLexerMain {
             // instance.parse().toHtml(builder,-1);
             // System.out.println(builder.toString());
 
-            JsonList instance = new JsonList(JsonObjType.LIST);
-            instance.add(new JsonString(JsonObjType.STRING,"fivestar"));
-            instance.add(new JsonString(JsonObjType.STRING,"ratings"));
+            JsonList list = new JsonList(JsonObjType.LIST);
+            list.add(new JsonString(JsonObjType.STRING,"Material: High Modulus Graphite"));
+            list.add(new JsonString(JsonObjType.STRING,"Power Frame Series"));
+            JsonString listKey = new JsonString(JsonObjType.STRING,"keyFeatures");
+            listKey.setKey();
+
+            JsonMap instance = new JsonMap(JsonObjType.MAP);
+            instance.setRoot();
+            instance.put(new JsonString(JsonObjType.STRING,true,"productId"),new JsonString(JsonObjType.STRING,false,true,"0ENJMZAXX2"));
+            instance.put(new JsonString(JsonObjType.STRING,true,"Title"),new JsonString(JsonObjType.STRING,false,true,"APACS Finapi 262 Unstrung Badminton Racquet"));
+            instance.put(listKey,list);
+            String expectedList = "\n\t[\n\t\t\"Material: High Modulus Graphite\",\n\t\t\"Power Frame Series\"\n\t]";
+            String keyValues = "\n\t\"productId\" : \"0ENJMZAXX2\",\n\t\"Title\" : \"APACS Finapi 262 Unstrung Badminton Racquet\",\n\t";
+            String expected = "\n{" + keyValues + "\"keyFeatures\"" + " : " + expectedList + "\n}"; 
+    
             StringBuilder appendable = new StringBuilder();
             instance.toString(appendable,-1);
-            logger.debug(appendable.toString());
+            System.out.println("response = " + appendable.toString());
+            System.out.println("expected = " + expected);
         }catch(Exception e) {
             e.printStackTrace();
         }
