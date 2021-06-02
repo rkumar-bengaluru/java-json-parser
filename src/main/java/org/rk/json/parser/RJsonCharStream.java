@@ -63,6 +63,7 @@ public class RJsonCharStream {
         }
 
         char c;
+        //System.out.println("bufpos ->" + (bufpos + 1) + ",available ->" + available);
         if (++bufpos == available)
             adjustBuffSize();
 

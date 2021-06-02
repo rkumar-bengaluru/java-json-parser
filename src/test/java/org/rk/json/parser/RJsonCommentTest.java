@@ -77,5 +77,16 @@ public class RJsonCommentTest {
             t = l.getNextToken();
             assertEquals(RJsonConstants.STRING_DOUBLE_NONEMPTY,t.kind);
     }
+
+     @Test  
+    public void test_StringReader() {  
+            try {
+                StringReader stream = new StringReader("/*test comment*/#another comment\n{\"name\":/*simple comment*/\"sonoo\",\"salary\":600000.0,\"age\":27}");
+                char[] dst = new char[4096];
+                stream.read(dst,0,4096);
+            } catch(Exception e) {
+                    fail(e.getMessage());
+            }
+    }
     
 }
