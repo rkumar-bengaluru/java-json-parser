@@ -90,6 +90,7 @@ public class RJsonCharStream {
     public String getImage() {
         String response = null;
         logger.debug("bufpos=" + bufpos + ",tokenBegin="+ tokenBegin);
+        logger.debug("buffer=" + buffer[0] + "," + buffer[1]  + "," + buffer[2]  + "," + buffer[3]  + "," + buffer[4] );
         if (bufpos >= tokenBegin)
             response = new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
         else 
