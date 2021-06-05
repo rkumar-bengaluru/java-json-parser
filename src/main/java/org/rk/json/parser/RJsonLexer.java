@@ -83,6 +83,8 @@ public class RJsonLexer extends NumberLexer implements RJsonConstants {
             try { 
              curChar = input_stream.readChar(); 
             } catch(java.io.IOException e) {
+               // hack for special characters after the last token.
+                matchedKind = 0;
                 return 1;
             }
             return analyzeCurrentCharacter();
